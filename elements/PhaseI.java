@@ -21,45 +21,45 @@ public class PhaseI implements Phase {
 
     public void initQuestionsPhaseI() {
         //Création des themes
-        Theme maths = new Theme("Mathématiques");
+        Theme maths = new Theme("maths");
         themes.addTheme(maths);
-        Theme jeuxVideos = new Theme("Jeux Vidéos");
+        Theme jeuxVideos = new Theme("jeuxVideos");
         themes.addTheme(jeuxVideos);
-        Theme series = new Theme("Séries");
+        Theme series = new Theme("series");
         themes.addTheme(series);
-        Theme films = new Theme("Films");
+        Theme films = new Theme("films");
         themes.addTheme(films);
-        Theme histoire = new Theme("Histoire");
+        Theme histoire = new Theme("histoire");
         themes.addTheme(histoire);
-        Theme nourriture = new Theme("Nourriture");
+        Theme nourriture = new Theme("nourriture");
         themes.addTheme(nourriture);
-        Theme musique = new Theme("Musique");
+        Theme musique = new Theme("musique");
         themes.addTheme(musique);
-        Theme geo = new Theme("Géographie");
-        themes.addTheme(geo);
-        Theme sciences = new Theme("Sciences");
+        Theme geographie = new Theme("geographie");
+        themes.addTheme(geographie);
+        Theme sciences = new Theme("sciences");
         themes.addTheme(sciences);
-        Theme animaux = new Theme("Animaux");
+        Theme animaux = new Theme("animaux");
         themes.addTheme(animaux);
-        Theme heros = new Theme("Super-Héros");
-        themes.addTheme(heros);
-        Theme humain = new Theme("Le corps humain");
-        themes.addTheme(humain);
-        Theme pays = new Theme("Pays");
+        Theme super_heros = new Theme("super_heros");
+        themes.addTheme(super_heros);
+        Theme corps_humain = new Theme("corps_humain");
+        themes.addTheme(corps_humain);
+        Theme pays = new Theme("pays");
         themes.addTheme(pays);
-        Theme pokemon = new Theme("Pokémon");
+        Theme pokemon = new Theme("pokemon");
         themes.addTheme(pokemon);
-        Theme fruits = new Theme("Fruits");
+        Theme fruits = new Theme("fruits");
         themes.addTheme(fruits);
-        Theme economie = new Theme("Economie");
+        Theme economie = new Theme("economie");
         themes.addTheme(economie);
-        Theme monuments = new Theme("Monuments");
+        Theme monuments = new Theme("monuments");
         themes.addTheme(monuments);
-        Theme energies = new Theme("Energies renouvelables");
-        themes.addTheme(energies);
-        Theme français = new Theme("Français");
-        themes.addTheme(français);
-        Theme nature = new Theme("Nature");
+        Theme energies_renouvelables = new Theme("energies_renouvelables");
+        themes.addTheme(energies_renouvelables);
+        Theme francais = new Theme("francais");
+        themes.addTheme(francais);
+        Theme nature = new Theme("nature");
         themes.addTheme(nature);
 
         //Création des qcm
@@ -106,11 +106,11 @@ public class PhaseI implements Phase {
         Qcm qcm21 = new Qcm("Dans quel boys-band Robbie Williams a-t-il commencé sa carrière ?",3, "Backstreet Boys", "Take that",
                 "East 17", 2, musique);
         Qcm qcm22 = new Qcm("Dans quelle ville italienne se trouve la tour Pirelli",1, "Rome", "Turin",
-                "Milan", 3, geo);
+                "Milan", 3, geographie);
         Qcm qcm23 = new Qcm("Quelle ville est surnommée <<la Fiancée de la Méditerranée>>?",2, "Tunis", "Tel-Aviv",
-                "Alexandrie", 2, geo);
+                "Alexandrie", 2, geographie);
         Qcm qcm24 = new Qcm("Outre la Belgique et le Luxembourg, quel est le troisième pays formant le Benelux?",3, "Pays-Bas", "Allemagne",
-                "Autriche", 1, geo);
+                "Autriche", 1, geographie);
         Qcm qcm25 = new Qcm("Quelle est la formule de l'intensité de la pesanteur ?",1, "G x ma x mb / d2", "Fa/b=G x ma x mb / d2",
                 "P=m x g", 3, sciences);
         Qcm qcm26 = new Qcm("Combien de chromosomes une cellule reproductrice contient-elle ?",2, "46", "23",
@@ -124,17 +124,17 @@ public class PhaseI implements Phase {
         Qcm qcm30 = new Qcm("Combien de temps dure la gestation d'un zèbre",3, "10 mois", "13 mois",
                 "15 mois", 2, animaux);
         Qcm qcm31 = new Qcm("Quel est le métier de superman",1, "journaliste", "facteur",
-                "medecin", 1, heros);
+                "medecin", 1, super_heros);
         Qcm qcm32 = new Qcm("Quelle est la particularité de Daredevil ?",2, "Il a des pouvoirs divinatoires", "C'est un anti-héros",
-                "Il est aveugle", 3, heros);
+                "Il est aveugle", 3, super_heros);
         Qcm qcm33 = new Qcm("A quel groupe appartiennent Flèche noire et Medusa",3, "les inhumains", "les x-men",
-                "les avengers", 1, heros);
+                "les avengers", 1, super_heros);
         Qcm qcm34 = new Qcm("Combien la langue compte-t-elle de muscles ?",1, "15", "11",
-                "20", 1, humain);
+                "20", 1, corps_humain);
         Qcm qcm35 = new Qcm("Combien y a-t-il de cellules dans le corps ?",2, "7500 milliards", "75 000 milliards",
-                "75 milliards", 2, humain);
+                "75 milliards", 2, corps_humain);
         Qcm qcm36 = new Qcm("De combien d'os est constitué le crâne humain",3, "12", "14",
-                "8", 2, humain);
+                "8", 2, corps_humain);
         Qcm qcm37 = new Qcm("Parmi ces pays, lequel est limitrophe à la France ?",1, "Italie", "Angleterre",
                 "Grèce", 1, pays);
         Qcm qcm38 = new Qcm("Quelle est la capitale du Cameroun ?",2, "Ouagadougou", "Yaoundé",
@@ -166,17 +166,17 @@ public class PhaseI implements Phase {
         Qcm qcm51 = new Qcm("Dans quelle ville se situe le Manneken Pis?",3, "Cologne", "Bruxelles",
                 "Amsterdam", 2, monuments);
         Qcm qcm52 = new Qcm("Quelle est l'énergie renouvelable la plus rentable ",1, "énergie éolienne", "énergie nucléaire",
-                "Energie hydraulique", 3, energies);
+                "Energie hydraulique", 3, energies_renouvelables);
         Qcm qcm53 = new Qcm("Quelle est l'énergie issue de la combustion des déchets organiques ?",2, "Energie de la biomasse", "Energie géothermique",
-                "Energie hydraulique", 1, energies);
+                "Energie hydraulique", 1, energies_renouvelables);
         Qcm qcm54 = new Qcm("Une dynamo fonctionne par l'énergie...",3, "cinétique", "mécanique",
-                "électrique", 2, energies);
+                "électrique", 2, energies_renouvelables);
         Qcm qcm55 = new Qcm("Complétez : \" Voilà ... il est question.",1, "De quoi", "Ce dont",
-                "Les deux", 3, français);
+                "Les deux", 3, francais);
         Qcm qcm56 = new Qcm("\" Qu'il est grand cet enfant ! \" Pouvez-vous donner la nature de \"qu'\" (que)",2, "pronom relatif", "conjonction de subordination",
-                "adverbe", 3, français);
+                "adverbe", 3, francais);
         Qcm qcm57 = new Qcm("Quelle artiste disait avec humour . \" Fermer les maisons closes, c'est plus qu'un crime, c'est un pléonasme.\"",3, "Jacky Sardou", "Arletty",
-                "Edith Piaf", 2, français);
+                "Edith Piaf", 2, francais);
         Qcm qcm58 = new Qcm("Lequel de ces animaux vit dans la jungle",1, "la hyène", "le rhinocéros",
                 "le babouin", 3, nature);
         Qcm qcm59 = new Qcm("De quelle famille les crocodiles sont-ils",2, "Alligatoridés", "les amphibiens",
@@ -267,21 +267,21 @@ public class PhaseI implements Phase {
         Rc rc19 = new Rc("Qui est l'interprète du titre Billie Jean? ",1, "michael jackson", musique);
         Rc rc20 = new Rc("Quel est l'album le plus vendu de tous les temps?",2, "thriller", musique);
         Rc rc21 = new Rc("Quelle est l'artiste feminine ayant remporté le plus de Grammys?",3, "beyonce", musique);
-        Rc rc22 = new Rc("Combien y a-t-il de continents?",1, "6", geo);
-        Rc rc23 = new Rc("Sur quel continent se situe le Malawi?",2, "afrique", geo);
-        Rc rc24 = new Rc("Quelle est la ville la plus peuplée au monde?",3, "shanghai", geo);
+        Rc rc22 = new Rc("Combien y a-t-il de continents?",1, "6", geographie);
+        Rc rc23 = new Rc("Sur quel continent se situe le Malawi?",2, "afrique", geographie);
+        Rc rc24 = new Rc("Quelle est la ville la plus peuplée au monde?",3, "shanghai", geographie);
         Rc rc25 = new Rc("Quelle est la découverte réalisée par Alexandre Fleming?",1, "pénicilline", sciences);
         Rc rc26 = new Rc("Quelle est la plus grande planète du système solaire?",2, "jupiter", sciences);
         Rc rc27 = new Rc("Quel est l'élément le plus présent dans l'air?",3, "azote", sciences);
         Rc rc28 = new Rc("Avec quels organes repirent les poissons? ",1, "branchies", animaux);
         Rc rc29 = new Rc("De quelle région du monde le puma est-il originaire",2, "amérique", animaux);
         Rc rc30 = new Rc("Quel genre d'animaux un enthomolgiste étudie-t-il?",3, "insectes", animaux);
-        Rc rc31 = new Rc("Quel est le nom civil de spiderman ?",1, "peter parker", heros);
-        Rc rc32 = new Rc("de quel type sont les rayons ayant provoqué la transformation de Bruce Banner en hulk ?",2, "gamma", heros);
-        Rc rc33 = new Rc("en quelle année est apparu dans les comics le tout premier super-héros au sens moderne du terme?",3, "1938", heros);
-        Rc rc34 = new Rc("quel est en moyenne et en litres le volume de sang d'un homme adulte ?",1, "5", humain);
-        Rc rc35 = new Rc("Quelle est la partie du cerveau qui controle l'équilibre ?",2, "cervelet", humain);
-        Rc rc36 = new Rc("Quel est l'os le plus court du corps humain ?",3, "étrier", humain);
+        Rc rc31 = new Rc("Quel est le nom civil de spiderman ?",1, "peter parker", super_heros);
+        Rc rc32 = new Rc("de quel type sont les rayons ayant provoqué la transformation de Bruce Banner en hulk ?",2, "gamma", super_heros);
+        Rc rc33 = new Rc("en quelle année est apparu dans les comics le tout premier super-héros au sens moderne du terme?",3, "1938", super_heros);
+        Rc rc34 = new Rc("quel est en moyenne et en litres le volume de sang d'un homme adulte ?",1, "5", corps_humain);
+        Rc rc35 = new Rc("Quelle est la partie du cerveau qui controle l'équilibre ?",2, "cervelet", corps_humain);
+        Rc rc36 = new Rc("Quel est l'os le plus court du corps humain ?",3, "étrier", corps_humain);
         Rc rc37 = new Rc("Quelle est la capitale des Philippines?",1,"manille", pays);
         Rc rc38 = new Rc("Quel est le nom actuel du pays qui fut autrefois appelé République populaire de Kampuchéa ?",2, "cambodge", pays);
         Rc rc39 = new Rc("Quel pays signifie littéralement le pays des hommes intègres en langue Mossa",3, "burkina faso", pays);
@@ -297,12 +297,12 @@ public class PhaseI implements Phase {
         Rc rc49 = new Rc("Quel monument donne son nom à un roman de Victor Hugo ?",1, "notre-dame de paris", monuments);
         Rc rc50 = new Rc("Quel roi est à l'origine du château de Versailles?",2, "louis 13", monuments);
         Rc rc51 = new Rc("De quelle couleur est le célèbre Golden Gate Bridge qui relie San Francisco à Sausalito?",3, "orange", monuments);
-        Rc rc52 = new Rc("En quelle année a été créé le concept de développement durable?",1, "1987", energies);
-        Rc rc53 = new Rc("Quel pays est le premier producteur d'énergie solaire au monde? ",2, "allemagne", energies);
-        Rc rc54 = new Rc("Quelle était le nom de la plus ancienne centrale nucléaire de France encore en activité?",3, "fessenheim", energies);
-        Rc rc55 = new Rc("Conjuguez le verbe mouvoir à la 2ème personne du pluriel au passé simple ",1, "mûtes", français);
-        Rc rc56 = new Rc("Quel est le pluriel du mot 'banal'?",2, "ça dépend", français);
-        Rc rc57 = new Rc("Quel est le mot qui a détrôné en longeur 'anticonstitutionnellement'",3, "intergouvernementalisations", français);
+        Rc rc52 = new Rc("En quelle année a été créé le concept de développement durable?",1, "1987", energies_renouvelables);
+        Rc rc53 = new Rc("Quel pays est le premier producteur d'énergie solaire au monde? ",2, "allemagne", energies_renouvelables);
+        Rc rc54 = new Rc("Quelle était le nom de la plus ancienne centrale nucléaire de France encore en activité?",3, "fessenheim", energies_renouvelables);
+        Rc rc55 = new Rc("Conjuguez le verbe mouvoir à la 2ème personne du pluriel au passé simple ",1, "mûtes", francais);
+        Rc rc56 = new Rc("Quel est le pluriel du mot 'banal'?",2, "ça dépend", francais);
+        Rc rc57 = new Rc("Quel est le mot qui a détrôné en longeur 'anticonstitutionnellement'",3, "intergouvernementalisations", francais);
         Rc rc58 = new Rc("Quelle plante est composée de petites clochettes blanches?",1, "muguet", nature);
         Rc rc59 = new Rc("Quelle est la couleur de la fleur la camomille?",2, "blanche", nature);
         Rc rc60 = new Rc("En quelle année a été signé le Protocole de Kyoto?",3, "1997", nature);
@@ -390,21 +390,21 @@ public class PhaseI implements Phase {
         Vf vf19 = new Vf("Jean-Jacques Goldman a écrit 'Je te le donne'", 1, true, musique);
         Vf vf20 = new Vf("Une portée contient 5 lignes ", 2, true, musique);
         Vf vf21 = new Vf("Les Enfoirés existe depuis 1970", 3, false, musique);
-        Vf vf22 = new Vf("Le Machu Picchu se trouve au Pérou", 1, true, geo);
-        Vf vf23 = new Vf("Les pays baltes sont la Norvège, la Suède et la Finlande", 2, false, geo);
-        Vf vf24 = new Vf("L'île de la Corse est divisé en 2 départements", 3, true, geo);
+        Vf vf22 = new Vf("Le Machu Picchu se trouve au Pérou", 1, true, geographie);
+        Vf vf23 = new Vf("Les pays baltes sont la Norvège, la Suède et la Finlande", 2, false, geographie);
+        Vf vf24 = new Vf("L'île de la Corse est divisé en 2 départements", 3, true, geographie);
         Vf vf25 = new Vf("Les champignons sont des plantes", 1, false, sciences);
         Vf vf26 = new Vf("Les chats sont la 1ère cause de mortalités chez les oiseaux", 2, true, sciences);
         Vf vf27 = new Vf("L'eau froide gèle plus vite que l'eau chaude", 3, false, sciences);
         Vf vf28 = new Vf("La baleine bleue est le plus grand animal du monde", 1, true, animaux);
         Vf vf29 = new Vf("Le jars est le mâle de l'oie", 2, true, animaux);
         Vf vf30 = new Vf("Le loup est un canidé", 3, true, animaux);
-        Vf vf31 = new Vf("L'action du film Captain Marvel se déroule dans les années 1990", 1, true, heros);
-        Vf vf32 = new Vf("Le film Watchmen a été réalisé par Zack Synder", 2, true, heros);
-        Vf vf33 = new Vf("Dans Venom, Eddie Brock présente sa propre émission intitulée Eddie Brock Show", 3, false, heros);
-        Vf vf34 = new Vf("Les cellules sanguines sont produites dans le foie", 1, false, humain);
-        Vf vf35 = new Vf("Pendant sa vie, une personne produira environ 500L de salive", 2, false, humain);
-        Vf vf36 = new Vf("Les tendons assurent la stabilité des articulations", 3, false, humain);
+        Vf vf31 = new Vf("L'action du film Captain Marvel se déroule dans les années 1990", 1, true, super_heros);
+        Vf vf32 = new Vf("Le film Watchmen a été réalisé par Zack Synder", 2, true, super_heros);
+        Vf vf33 = new Vf("Dans Venom, Eddie Brock présente sa propre émission intitulée Eddie Brock Show", 3, false, super_heros);
+        Vf vf34 = new Vf("Les cellules sanguines sont produites dans le foie", 1, false, corps_humain);
+        Vf vf35 = new Vf("Pendant sa vie, une personne produira environ 500L de salive", 2, false, corps_humain);
+        Vf vf36 = new Vf("Les tendons assurent la stabilité des articulations", 3, false, corps_humain);
         Vf vf37 = new Vf("Les 2 couleurs du drapeau suédois sont le jaune et le vert", 1, false, pays);
         Vf vf38 = new Vf("Tétouan est une ville algérienne", 2, false, pays);
         Vf vf39 = new Vf("Le Chiemsee est un lac situé en Allemagne", 3, true, pays);
@@ -420,12 +420,12 @@ public class PhaseI implements Phase {
         Vf vf49 = new Vf("Gustave Eiffel a participé à la construction de la Tour Eiffel et de la statie de la Liberté", 1, true, monuments);
         Vf vf50 = new Vf("L'inclinaison de la tour de Pise s'explique par la construction dun métro qui en a affaibli les fondations", 2, false, monuments);
         Vf vf51 = new Vf("Le monastère bouddhiste du mont Popa est construit sur un volcan", 3, true, monuments);
-        Vf vf52 = new Vf("La combustion de biomasse produit directement de l'électricité", 1, false, energies);
-        Vf vf53 = new Vf("Les panneaux photovoltaïques sont généralement formés de plusieurs couches superposées", 2, true, energies);
-        Vf vf54 = new Vf("La géothermie de surface est utilisée principalement pour le chauffage et la climatisation des immeubles", 3, true, energies);
-        Vf vf55 = new Vf("La phrase est correcte : Je bouille de colère face à cette injustice", 1, false, français);
-        Vf vf56 = new Vf("Le verbe 'traire' n'a pas de passé simple", 2, true, français);
-        Vf vf57 = new Vf("Il n'y a pas de faute : Jules s'est converti au bouddhisme", 3, true, français);
+        Vf vf52 = new Vf("La combustion de biomasse produit directement de l'électricité", 1, false, energies_renouvelables);
+        Vf vf53 = new Vf("Les panneaux photovoltaïques sont généralement formés de plusieurs couches superposées", 2, true, energies_renouvelables);
+        Vf vf54 = new Vf("La géothermie de surface est utilisée principalement pour le chauffage et la climatisation des immeubles", 3, true, energies_renouvelables);
+        Vf vf55 = new Vf("La phrase est correcte : Je bouille de colère face à cette injustice", 1, false, francais);
+        Vf vf56 = new Vf("Le verbe 'traire' n'a pas de passé simple", 2, true, francais);
+        Vf vf57 = new Vf("Il n'y a pas de faute : Jules s'est converti au bouddhisme", 3, true, francais);
         Vf vf58 = new Vf("Un espace sans arbres qui se situe dans une forêt est une clairière", 1, true, nature);
         Vf vf59 = new Vf("Un herbier est une collection de feuilles et de plantes séchées, conservée entre des feuilles de papier", 2, true, nature);
         Vf vf60 = new Vf("Un phycologue étudie les coquillages", 3, false, nature);
@@ -518,17 +518,17 @@ public class PhaseI implements Phase {
 
         // Selection des n themes
         List<Theme> listThemesPI = themes.selectNThemes((int) (Math.random() * 11) + 10);
-        String str = "[";
+        /*String str = "[";
         for(Theme theme : listThemesPI) {
             str += theme.getNom() + ", ";
         }
-        str += "]";
-        System.out.println("Thèmes de la phase I :\n" + str + "\n");
+        str += "]";*/
+        System.out.println("Thèmes de la phase I :\n" + listThemesPI + "\n");
 
         // Selection aleatoire d'un theme parmis ces n themes
         int indiceTheme = (int) (Math.random() * listThemesPI.size());
         Theme unTheme = listThemesPI.get(indiceTheme);
-        System.out.println("Thème du 1er Round : " + unTheme);
+        System.out.println("Thème du 1er Round : " + unTheme.getNom());
 
         // Choix du nombre de questions par joueurs
         int nbQuestions = (int) (Math.random() * 4) + 1;
@@ -568,6 +568,8 @@ public class PhaseI implements Phase {
             for (int k = 0; k < listThemesPI.size(); k++) { // nombre de themes au total
                 if(j < 1) {
                     indiceTheme++;
+                    if(indiceTheme >= listThemesPI.size())
+                        indiceTheme = 0;
                     unTheme = listThemesPI.get(indiceTheme);
                     System.out.println("Tour " + tour + " :\n");
                     tour++;
@@ -587,23 +589,26 @@ public class PhaseI implements Phase {
                     break;
             }
         }
-        System.out.println("Phase I terminée. Score :\n");
-        for (Joueur joueur : joueursPhaseI.getParticipants()) {
-            System.out.println(joueur.getNom() + " : " + joueur.getScore());
-        }
+        System.out.println("Phase I terminée.\n");
 
         // 6) elimination des joueurs : on enleve les plus faibles
-        while (nbJoueurs > 3) {
-            int min = joueursPhaseI.getParticipants()[0].getScore();
-            int indiceMin = 0;
+        int nbDemiFinalistes = nbJoueurs;
+        while (nbDemiFinalistes > 3) {
+            int k = 0;
+            int min;
+            do {
+                min = joueursPhaseI.getParticipants()[k].getScore();;
+                k++;
+            } while(joueursPhaseI.getParticipants()[k-1].getEtat().equals("Eliminé"));
+            int indiceMin = k-1;
             for (int i = 1; i < nbJoueurs; i++) {
-                if (joueursPhaseI.getParticipants()[i].getScore() < min) {
+                if (joueursPhaseI.getParticipants()[i].getScore() < min && !joueursPhaseI.getParticipants()[i].getEtat().equals("Eliminé")) {
                     min = joueursPhaseI.getParticipants()[i].getScore();
                     indiceMin = i;
                 }
             }
             joueursPhaseI.getParticipants()[indiceMin].updateEtat("e");
-            nbJoueurs--;
+            nbDemiFinalistes--;
         }
         System.out.println("Joueurs encore en lice : ");
         for (Joueur joueur : joueursPhaseI.getParticipants()) {

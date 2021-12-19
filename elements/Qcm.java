@@ -38,8 +38,8 @@ public class Qcm extends Question {
             }
         }
         catch(InputMismatchException e) {
-                System.out.println("Saisie incorrect! Veuillez recommencer." + '\n');
-                testBonneReponse(joueur, nomPhase);
+            System.out.println("Saisie incorrect! Veuillez recommencer." + '\n');
+            testBonneReponse(joueur, nomPhase);
         }
     }
 
