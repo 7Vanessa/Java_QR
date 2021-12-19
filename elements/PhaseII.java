@@ -29,22 +29,26 @@ public class PhaseII implements Phase {
         System.out.println("Thèmes de la phase II :\n" + listThemesPhase + "\n");
         System.out.println("Chaque joueur va choisir deux thèmes.\n");
 
+        for(Joueur joueur : joueursPhaseII.getParticipants()) {
+            if(joueur.getEtat().equals("Gagnant"))
+                joueur.updateEtat("a");
+        }
+
         // liste : j1,j2,j3,j1,j2,j3
+        Map<String, List<Theme>> themesParticipants = new HashMap<>();
+        for(Joueur joueur : joueursPhaseII.getParticipants()) {
+            if(joueur.getEtat().equals("En attente"))
+                themesParticipants.put(joueur.getNom(), new ArrayList<>());
+        }
 
         String s = "";
         Set<String> setThemesDP = new HashSet<>();
-        Map<String, List<Theme>> themesParticipants = new HashMap<>();
-        List<Theme> j1 = new ArrayList<>();
-        List<Theme> j2 = new ArrayList<>();
-        List<Theme> j3 = new ArrayList<>();
 
-        System.out.println(Arrays.toString(joueursPhaseII.getParticipants()));
-
-        int compteur = 0;
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j<joueursPhaseII.getParticipants().length ; j++) {
-                if (joueursPhaseII.getParticipants()[j].getEtat().equals("Sélectionné")) {
-                    System.out.println("Joueur " + joueursPhaseII.getParticipants()[j].getNom() + " : ");
+            for (Joueur joueur : joueursPhaseII.getParticipants()) {
+                if (joueur.getEtat().equals("En attente")) {
+                    joueur.updateEtat("s");
+                    System.out.println("Joueur " + joueur.getNom() + " : ");
                     boolean found = false;
                     while(!found) {
                         System.out.println("Selectionnez un thème : ");
@@ -57,48 +61,36 @@ public class PhaseII implements Phase {
                             if (theme.getNom().equals(s)) {
                                 found = true;
                                 setThemesDP.add(s);
-                                switch(compteur) {
-                                    case 0 -> j1.add(theme);
-                                    case 1 -> j2.add(theme);
-                                    case 2 -> j3.add(theme);
-                                }
-                                if(i == 1) {
-                                    switch (compteur) {
-                                        case 0 -> themesParticipants.put(joueursPhaseII.getParticipants()[j].getNom(), j1);
-                                        case 1 -> themesParticipants.put(joueursPhaseII.getParticipants()[j].getNom(), j2);
-                                        case 2 -> themesParticipants.put(joueursPhaseII.getParticipants()[j].getNom(), j3);
-                                    }
-                                }
+                                themesParticipants.get(joueur.getNom()).add(theme);
                             }
                         }
                     }
-                    compteur++;
+                    joueur.updateEtat("a");
                 }
             }
         }
 
         System.out.println(themesParticipants);
-        System.out.println(j3);
 
         // 4)
-        int nbQuestions = (int) (Math.random() * 3) + 2;
-        //System.out.println("Nombre de questions par joueur : "+nbQuestions);
-        System.out.println("\nNombre de questions par joueur : 2");
+        int nbQuestions = (int) (Math.random() * 4) + 2;
+        System.out.println("Nombre de questions par joueur : "+nbQuestions);
 
         // 5) Questions posees aux joueurs
         int tour = 1;
 
         // a) round avec minimum 2 questions moyennes
-        System.out.println("Tour " + tour + " :\n");
-        tour++;
 
-        int mini = 0;
-        int maxi = 3;
-        int randTheme = (int) (Math.random()*2);
+        int randTheme;
 
+        // 2 questions moyennes
         for (int i = 0; i < 2; i++) {
+            System.out.println("Tour " + tour + " :\n");
+            tour++;
             for (Joueur joueur : joueursPhaseII.getParticipants()) {
-                if (!(joueur.getEtat().equals("Eliminé"))) {
+                randTheme = (int) (Math.random()*2);
+                if (!joueur.getEtat().equals("Eliminé")) {
+                    joueur.updateEtat("s");
                     System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
                     Question randQuestion = themesParticipants.get(joueur.getNom()).get(randTheme).getQuestions().selectRandQuestion();
 
@@ -113,20 +105,19 @@ public class PhaseII implements Phase {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    joueur.updateEtat("a");
                 }
             }
         }
 
         // b) round avec le nombre de questions restant
-        // for(int j = 0 ; j < nbQuestions-1 ; j++) { // -1 a cause du premier tour avec questions faciles
-
-        //while(j < nbQuestions-2) {
-        // for(int k = 0 ; k < nbQuestions-2 ; k++ ) // -2 a cause du premier tour avec questions moyennes
-        for (int k = 0; k < 2; k++) {
+        for (int k = 0; k < nbQuestions-2; k++) {  // -2 a cause des deux premiers tours avec questions moyennes
             System.out.println("Tour " + tour + " :\n");
             tour++;
             for (Joueur joueur : joueursPhaseII.getParticipants()) {
+                randTheme = (int) (Math.random()*2);
                 if (!(joueur.getEtat().equals("Eliminé"))) {
+                    joueur.updateEtat("s");
                     System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
                     Question randQuestion = themesParticipants.get(joueur.getNom()).get(randTheme).getQuestions().selectRandQuestion();
                     System.out.println(randQuestion);
@@ -135,6 +126,7 @@ public class PhaseII implements Phase {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    joueur.updateEtat("a");
                 }
             }
         }
@@ -147,7 +139,6 @@ public class PhaseII implements Phase {
             if(!joueur.getEtat().equals("Eliminé"))
                 nbFinalistes++;
         }
-        System.out.println(nbFinalistes);
         while (nbFinalistes > 2) {
             int k = 0;
             int min;
@@ -170,6 +161,8 @@ public class PhaseII implements Phase {
 
         System.out.println("Joueurs encore en lice : ");
         for (Joueur joueur : joueursPhaseII.getParticipants()) {
+            if(!joueur.getEtat().equals("Eliminé"))
+                joueur.updateEtat("g");
             System.out.println(joueur);
         }
         return joueursPhaseII.getParticipants();

@@ -18,6 +18,15 @@ public class Themes {
         return themes;
     }
 
+    public int selectTheme(Theme theme) {
+        for(int i = 0 ; i < themes.size() ; i++) {
+            if(themes.get(i).equals(theme))
+                return i;
+        }
+        System.out.println("Erreur : ce theme n'appartient pas a la liste");
+        return -1;
+    }
+
     public List<Theme> selectNThemes(int nbThemes) {
         List<Theme> themesChoisis = new ArrayList<>();
         int rand;

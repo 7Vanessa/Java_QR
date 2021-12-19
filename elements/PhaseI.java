@@ -1,5 +1,6 @@
 package elements;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -493,62 +494,31 @@ public class PhaseI implements Phase {
     }
 
     @Override
-    public Joueur[] playPhase() {
-        //Creation des themes et questions
-        initQuestionsPhaseI();
-
+    public int choixNbJoueurs() {
+        Scanner scanner = new Scanner(System.in);
         // Creation des joueurs
         System.out.println("Rentrez le nombre de joueurs : ");
-        Scanner scanner = new Scanner(System.in);
         int nbJoueurs = scanner.nextInt();
-
         while (nbJoueurs < 4 || nbJoueurs > 20) {
-            System.out.println("Saisie incorrrecte : le nombre de joueurs doit être compris entre 4 et 20.\nRecommencez : ");
+            System.out.println("\nSaisie incorrrecte : le nombre de joueurs doit être compris entre 4 et 20.\nRecommencez : ");
             nbJoueurs = scanner.nextInt();
         }
+        return nbJoueurs;
+    }
 
-        joueursPhaseI = new Joueurs(nbJoueurs);
-        joueursPhaseI = selectJoueurs();
-
-        for (Joueur joueur : joueursPhaseI.getParticipants()) {
-            joueur.updateEtat("s");
-        }
-
-        System.out.println(joueursPhaseI);
-
-        // Selection des n themes
-        List<Theme> listThemesPI = themes.selectNThemes((int) (Math.random() * 11) + 10);
-        /*String str = "[";
-        for(Theme theme : listThemesPI) {
-            str += theme.getNom() + ", ";
-        }
-        str += "]";*/
-        System.out.println("Thèmes de la phase I :\n" + listThemesPI + "\n");
-
-        // Selection aleatoire d'un theme parmis ces n themes
-        int indiceTheme = (int) (Math.random() * listThemesPI.size());
-        Theme unTheme = listThemesPI.get(indiceTheme);
-        System.out.println("Thème du 1er Round : " + unTheme.getNom());
-
-        // Choix du nombre de questions par joueurs
-        int nbQuestions = (int) (Math.random() * 4) + 1;
-        //System.out.println("Nombre de questions par joueur : "+nbQuestions);
-        System.out.println("Nombre de questions par joueur : 2");
-
-        // Les joueurs repondent aux questions (dans l'ordre de selection)
-        int tour = 1;
-
-        // a) round avec que des questions faciles + AJOUTER CONDITION FACILE
-        System.out.println("Tour " + tour + " :\n");
-        tour++;
+    @Override
+    public void questionsDifficulte(int tour, Theme theme) {
         for (int i = 0; i < 1; i++) {
+            System.out.println("Tour " + tour + " : " + theme + "\n");
+            tour++;
             for (Joueur joueur : joueursPhaseI.getParticipants()) {
                 System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
-                Question randQuestion = unTheme.getQuestions().selectRandQuestion();
+                joueur.updateEtat("s");
+                Question randQuestion = theme.getQuestions().selectRandQuestion();
 
                 //on veut des questions de difficulte 1
                 while (randQuestion.getDifficulte() != 1) {
-                    randQuestion = unTheme.getQuestions().selectRandQuestion();
+                    randQuestion = theme.getQuestions().selectRandQuestion();
                 }
 
                 System.out.println(randQuestion);
@@ -557,41 +527,44 @@ public class PhaseI implements Phase {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                joueur.updateEtat("a");
             }
         }
+    }
 
-        // b) round avec le nombre de questions restant
+    @Override
+    public void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> ThemesPhase) {
+        int j = -1;
 
-        int j = 0;
-
-        while(j < 1) { // nombre de questions, -1 a cause du premier tour avec questions faciles
-            for (int k = 0; k < listThemesPI.size(); k++) { // nombre de themes au total
-                if(j < 1) {
-                    indiceTheme++;
-                    if(indiceTheme >= listThemesPI.size())
-                        indiceTheme = 0;
-                    unTheme = listThemesPI.get(indiceTheme);
-                    System.out.println("Tour " + tour + " :\n");
-                    tour++;
-                    for (Joueur joueur : joueursPhaseI.getParticipants()) {
-                        System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
-                        Question randQuestion = unTheme.getQuestions().selectRandQuestion();
-                        System.out.println(randQuestion);
-                        try {
-                            randQuestion.testBonneReponse(joueur, NOMPHASE);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+        for (int k = 0; k < ThemesPhase.size(); k++) { // nombre de questions restantes, -1 a cause du premier tour avec questions faciles
+            j++;
+            if(j < nbQuestions-1) { // nombre de themes au total
+                indiceTheme++;
+                if(indiceTheme >= ThemesPhase.size())
+                    indiceTheme = 0;
+                theme = ThemesPhase.get(indiceTheme);
+                System.out.println("Tour " + tour + " : " + theme + "\n");
+                tour++;
+                for (Joueur joueur : joueursPhaseI.getParticipants()) {
+                    System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
+                    joueur.updateEtat("s");
+                    Question randQuestion = theme.getQuestions().selectRandQuestion();
+                    System.out.println(randQuestion);
+                    try {
+                        randQuestion.testBonneReponse(joueur, NOMPHASE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    j++;
+                    joueur.updateEtat("a");
                 }
-                else
-                    break;
             }
+            else
+                break;
         }
-        System.out.println("Phase I terminée.\n");
+    }
 
-        // 6) elimination des joueurs : on enleve les plus faibles
+    @Override
+    public void elimination(int nbJoueurs) {
         int nbDemiFinalistes = nbJoueurs;
         while (nbDemiFinalistes > 3) {
             int k = 0;
@@ -610,10 +583,68 @@ public class PhaseI implements Phase {
             joueursPhaseI.getParticipants()[indiceMin].updateEtat("e");
             nbDemiFinalistes--;
         }
+    }
+
+    @Override
+    public void affichagePhase() {
         System.out.println("Joueurs encore en lice : ");
         for (Joueur joueur : joueursPhaseI.getParticipants()) {
+            if(!joueur.getEtat().equals("Eliminé"))
+                joueur.updateEtat("g");
             System.out.println(joueur);
         }
+        System.out.println("\n");
+    }
+
+    @Override
+    public Joueur[] playPhase() throws InputMismatchException {
+        //Creation des themes et questions
+        initQuestionsPhaseI();
+        // Saisie du nombre de joueurs
+        int nbJoueurs = 0;
+        boolean mismatch = true;
+        while(mismatch) {
+            try {
+                nbJoueurs = choixNbJoueurs();
+                mismatch = false;
+            } catch (InputMismatchException e) {
+                System.out.println("\nRecommencez : ");
+            }
+        }
+
+        // Initialisation des joueurs de la phase
+        joueursPhaseI = new Joueurs(nbJoueurs);
+        joueursPhaseI = selectJoueurs();
+
+        System.out.println(joueursPhaseI);
+
+        // Selection des n themes
+        List<Theme> themesPhaseI = themes.selectNThemes((int) (Math.random() * 11) + 10);
+        System.out.println("Thèmes de la phase I :\n" + themesPhaseI + "\n");
+
+        // Selection aleatoire d'un theme parmis ces n themes
+        int indiceTheme = (int) (Math.random() * themesPhaseI.size());
+        Theme unTheme = themesPhaseI.get(indiceTheme);
+
+        // Choix du nombre de questions par joueurs, entre 1 et 4
+        int nbQuestions = (int) (Math.random() * 4) + 1;
+        System.out.println("Nombre de questions par joueur : "+nbQuestions);
+
+        // Les joueurs repondent aux questions (dans l'ordre de selection)
+
+        int tour = 1;
+        // Partie de la phase avec que des questions faciles
+        questionsDifficulte(tour, unTheme);
+
+        // Partie de la phase avec le nombre de questions restant
+        autresQuestions(tour, unTheme, nbQuestions, indiceTheme, themesPhaseI);
+        System.out.println("Phase I terminée.\n");
+
+        // Elimination des joueurs : on enleve les plus faibles
+        elimination(nbJoueurs);
+
+        affichagePhase();
+
         return joueursPhaseI.getParticipants();
     }
 
