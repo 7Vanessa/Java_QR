@@ -26,11 +26,12 @@ public class Theme {
         this.questions = questions;
     }
 
+    @Override
     public String toString() {
-        String str = "Thème : " + nom + '\n';
-        for(Question question : questions) {
+        //String str = "Thème : " + nom + '\n';
+        /*for(Question question : questions) {
             str += question.toString() + '\n';
-        }
-        return str;
+        }*/
+        return nom;
     }
 }

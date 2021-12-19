@@ -9,5 +9,6 @@ public class Game {
         Themes themesPhaseII = phaseI.getThemes();
         PhaseII phaseII = new PhaseII(themesPhaseII);
         phaseII.getJoueursPhaseII().setParticipants(joueursPhaseII);
+        Joueur[] joueursPhaseIII = phaseII.playPhase();
     }
 }

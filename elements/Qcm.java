@@ -1,6 +1,7 @@
 package elements;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,20 +24,22 @@ public class Qcm extends Question {
     }
 
     @Override
-    public void testBonneReponse(Joueur joueur, String nomPhase) {
+    public void testBonneReponse(Joueur joueur, String nomPhase) throws InputMismatchException {
         System.out.println("Veuillez saisir votre réponse. (1, 2 ou 3)");
         Scanner choix = new Scanner(System.in);
-        int reponse = choix.nextInt();
-        if(reponse != 1 && reponse != 2 && reponse != 3) {
-            System.out.println("Saisie incorrect! Veuillez recommencer.");
+        try {
+            int reponse = choix.nextInt();
+            if (reponse != 1 && reponse != 2 && reponse != 3) {
+                System.out.println("Saisie incorrect! Veuillez recommencer.");
+                testBonneReponse(joueur, nomPhase);
+            } else if (reponse == bonneReponse) {
+                joueur.updateScore(nomPhase);
+                System.out.println("Bonne réponse !" + '\n');
+            }
+        }
+        catch(InputMismatchException e) {
+            System.out.println("Saisie incorrect! Veuillez recommencer." + '\n');
             testBonneReponse(joueur, nomPhase);
-        }
-        else if(reponse == bonneReponse) {
-            joueur.updateScore(nomPhase);
-            System.out.println("Bonne réponse !" + '\n');
-        }
-        else {
-            System.out.println("Mauvaise réponse :(" + '\n');
         }
     }
 

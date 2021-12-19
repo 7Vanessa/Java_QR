@@ -44,6 +44,10 @@ public class Joueur {
         this.etat = etats.get(etat);
     }
 
+    public String getEtat() {
+        return etat;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -54,6 +58,6 @@ public class Joueur {
 
     @Override
     public String toString() {
-        return "Joueur " + nom + "  n°" + numero + "  Score : " + score + "  Etat : " + etat + '\n';
+        return "Joueur " + nom + "  n°" + numero + "  Score : " + score + "  Etat : " + etat;
     }
 }
