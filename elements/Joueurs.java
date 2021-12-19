@@ -18,6 +18,10 @@ public class Joueurs {
         return participants;
     }
 
+    public void setParticipants(Joueur[] nouveauParticipants) {
+        participants = nouveauParticipants;
+    }
+
     public Joueur selectRandomPlayer() {
         Joueur joueur = null;
         while(joueur == null) {

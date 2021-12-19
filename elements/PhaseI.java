@@ -591,6 +591,7 @@ public class PhaseI implements Phase {
         for (Joueur joueur : joueursPhaseI.getParticipants()) {
             System.out.println(joueur.getNom() + " : " + joueur.getScore());
         }
+
         // 6) elimination des joueurs : on enleve les plus faibles
         while (nbJoueurs > 3) {
             int min = joueursPhaseI.getParticipants()[0].getScore();
@@ -615,4 +616,9 @@ public class PhaseI implements Phase {
     public String getNomPhase() {
         return NOMPHASE;
     }
+
+    public Themes getThemes() {
+        return themes;
+    }
+
 }

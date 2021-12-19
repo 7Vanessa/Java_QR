@@ -1,11 +1,13 @@
 package jeu;
 
-import elements.Joueurs;
-import elements.PhaseI;
+import elements.*;
 
 public class Game {
     public static void main(String []args) {
         PhaseI phaseI = new PhaseI();
-        phaseI.playPhase();
+        Joueur[] joueursPhaseII = phaseI.playPhase();
+        Themes themesPhaseII = phaseI.getThemes();
+        PhaseII phaseII = new PhaseII(themesPhaseII);
+        phaseII.getJoueursPhaseII().setParticipants(joueursPhaseII);
     }
 }

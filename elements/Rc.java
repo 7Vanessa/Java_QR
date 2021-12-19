@@ -31,7 +31,7 @@ public class Rc extends Question {
 
     @Override
     public void saisie() {
-
+        // Pas d'utilite
     }
 
 }

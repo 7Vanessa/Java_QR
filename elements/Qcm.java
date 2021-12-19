@@ -47,5 +47,6 @@ public class Qcm extends Question {
 
     @Override
     public void saisie() {
+        // Pas d'utilite
     }
 }

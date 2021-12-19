@@ -38,6 +38,6 @@ public class Vf extends Question {
 
     @Override
     public void saisie() {
-
+        // Pas d'utilite
     }
 }
