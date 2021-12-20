@@ -1,3 +1,26 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe PhaseI : Cette classe implémente l'interface Phase.
+ * La classe PhaseI est composé d'un attribut Joueurs correspondant aux
+ * joueurs de la phase, d'un attribut Themes correspondant aux thèmes de
+ * la phase et d'un attribut NOMPHASE correspondant au de la phase.
+ *
+ * C'est dans cette phase que nous initialisons les différents thèmes
+ * et les différentes questions du jeu à l'aide de la méthode initQuestionsPhaseI().
+ *
+ * Cette classe représente le déroulé de la phase I, la méthode principale est
+ * playPhase() qui permet de jouer la phase.
+ *
+ * Au début de la phase, nous demandons à l'utilisateur de saisir
+ * le nombre de joueurs de la partie.
+ */
+
 package elements;
 
 import java.util.*;
@@ -8,13 +31,16 @@ public class PhaseI implements Phase {
     private Joueurs joueursPhaseI;
     private final Themes themes;
 
+    /**
+     * Permet de créer une instance de Themes correspondant à la liste des thèmes de la phase
+     */
     public PhaseI() {
         themes = new Themes();
     }
 
     /**
-     * Permet d'attribuer un personnage a chaque joueur de la partie
-     * @return les personnages des joueurs
+     * Permet de selectionner la liste des joueurs participants
+     * @return la un objets Joueurs qui est la liste des joueurs participants
      */
     @Override
     public Joueurs selectJoueurs() {
@@ -24,6 +50,11 @@ public class PhaseI implements Phase {
 
     /**
      * Permet d'initialiser les questions du jeu
+     * Pas de @return car cette méthode est utilisée pour créer des thèmes afin
+     * de remplir l'attribut themes de type Themes de la PhaseI qui a été initilisé
+     * dans le constructeur et qui qui est composé de plusieurs thèmes.
+     * De plus cette méthode créer les questions de types
+     * Qcm, Vf et Rc et ajoute ces questions dans leur thèmes respectifs.
      */
     public void initQuestionsPhaseI() {
         // Création des themes
@@ -505,8 +536,8 @@ public class PhaseI implements Phase {
 
     /**
      * Lancement de la phase I
-     * @return l'etat des joueurs pour la phase II
-     * @throws InputMismatchException si le nombre de joueur n'est pas un entier
+     * @return la liste des joueurs ayant participé à la phase avec leur etat mis à jour
+     * @throws InputMismatchException si la saisie de l'utilisateur ne correspond pas au type attendu
      */
     @Override
     public Joueur[] playPhase() throws InputMismatchException {
@@ -566,7 +597,7 @@ public class PhaseI implements Phase {
 
     /**
      * Permet a l'utilisateur de choisir le nombre de joueurs de la partie
-     * @return le nombre de joueurs
+     * @return la saisie de l'utilisateur correspondant au nombre de joueurs participants
      */
     public int choixNbJoueurs() {
         // Saisie du nombre de joueurs (entre 4 et 20)
@@ -581,10 +612,11 @@ public class PhaseI implements Phase {
     }
 
     /**
-     * Correspond a la partie de la phase avec au moins un question facile
+     * Correspond a la partie de la phase avec au moins une question facile
      * @param tour correspond au n-ieme tour de la phase
      * @param theme correspond au theme de la question facile
-     * @return le tour pour les questions restantes
+     * @param indiceQuestion indice de la question
+     * @return l'indice de la question
      */
     public int questionsDifficulte(int tour, Theme theme, int indiceQuestion) {
         Question question;
@@ -644,6 +676,8 @@ public class PhaseI implements Phase {
      * @param nbQuestions correspond au nombre de questions restant
      * @param indiceTheme correspond a l'indice du theme choisi a chaque tour
      * @param themesPhase correspond aux themes de la phase
+     * @param indiceQuestion indice de la question
+     * Pas de @return car execute le déroulé des questions réponses
      */
     public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase, int indiceQuestion) {
         int j = -1;
@@ -697,7 +731,9 @@ public class PhaseI implements Phase {
 
     /**
      * Correspond a la partie de la phase avec l'elimination des perdants
-     * @param nbJoueurs correspond au nombre de joueurs
+     * @param nbJoueurs correspond au nombre de joueurs de la phase
+     * Pas de @return car cette méthode permet juste de modifier l'etat des joueurs à l'issu de la phase,
+     * en Eliminé ou Gagnant
      */
     @Override
     public void elimination(int nbJoueurs) {
@@ -733,6 +769,7 @@ public class PhaseI implements Phase {
 
     /**
      * Correspond a l'affichage du resultat final de la phase
+     * Pas de @return car utilisation de System.out.println
      */
     @Override
     public void affichagePhase() {
@@ -750,8 +787,19 @@ public class PhaseI implements Phase {
         System.out.println("\n");
     }
 
-    // Getter
+    /**
+     * Getter de themes
+     * @return l'attribut themes de la phase correspondant à la liste des thèmes de la phase
+     */
     public Themes getThemes() {
         return themes;
+    }
+
+    /**
+     * Getter de joueursPhaseI
+     * @return l'attribut joueursPhaseI de la phase correspondant au joueurs de la phase
+     */
+    public Joueurs getJoueursPhaseI() {
+        return joueursPhaseI;
     }
 }

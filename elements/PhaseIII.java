@@ -1,3 +1,23 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe PhaseIII : Cette classe implémente l'interface Phase.
+ * La classe PhaseIII est composé d'un attribut Joueurs correspondant aux
+ * joueurs de la phase, d'un attribut Themes correspondant aux thèmes de
+ * la phase et d'un attribut NOMPHASE correspondant au de la phase.
+ *
+ * Cette classe représente le déroulé de la phase III, la méthode principale est
+ * playPhase() qui permet de jouer la phase.
+ * Il s'agit de la phase finale.
+ *
+ * Les thèmes choisis : pokemon, corps_humain et super_heros
+ */
+
 package elements;
 
 import java.util.*;
@@ -8,11 +28,19 @@ public class PhaseIII implements Phase {
     private final Joueurs joueursPhaseIII;
     private final Themes themes;
 
+    /**
+     * Permet de créer une instance de Joueurs correspondant au tableau de joueurs de la phase
+     * @param themes thèmes de la phase III
+     */
     public PhaseIII(Themes themes) {
         this.themes = themes;
         joueursPhaseIII = new Joueurs(2);
     }
 
+    /**
+     * Permet de selectionner la liste des joueurs participants
+     * @return la un objets Joueurs qui est la liste des joueurs participants
+     */
     // Pas d'utilite dans cette phase
     @Override
     public Joueurs selectJoueurs() {
@@ -21,7 +49,7 @@ public class PhaseIII implements Phase {
 
     /**
      * Lancement de la phase III
-     * @return l'etat des joueurs
+     * @return la liste des joueurs ayant participé à la phase avec leur etat mis à jour
      */
     @Override
     public Joueur[] playPhase() {
@@ -76,12 +104,13 @@ public class PhaseIII implements Phase {
     }
 
     /**
-     * Correspond a la partie de la phase avec au moins un question facile
+     * Correspond a la partie de la phase avec au moins 2 questions difficiles
      * @param tour correspond au n-ieme tour de la phase
      * @param indiceTheme correspond a l'indice du theme du tour actuel
      * @param theme correspond a l'indice du theme choisi a chaque tour
      * @param themesPhase correspond aux themes de la phase
-     * @return le tour pour les questions restantes
+     * @param indiceQuestion indice de la question
+     * @return l'indice de la question
      */
     public int questionsDifficulte(int tour, int indiceTheme, Theme theme, List<Theme> themesPhase, int indiceQuestion) {
         for (int i = 0; i < 2; i++) {
@@ -138,6 +167,8 @@ public class PhaseIII implements Phase {
      * @param nbQuestions correspond au nombre de questions restant
      * @param indiceTheme correspond a l'indice du theme choisi a chaque tour
      * @param themesPhase correspond aux themes de la phase
+     * @param indiceQuestion indice de la question
+     * Pas de @return car execute le déroulé des questions réponses
      */
     public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase, int indiceQuestion) {
         int j = -1;
@@ -195,7 +226,9 @@ public class PhaseIII implements Phase {
 
     /**
      * Correspond a la partie de la phase avec l'elimination des perdants
-     * @param nbJoueurs correspond au nombre de joueurs
+     * @param nbJoueurs correspond au nombre de joueurs de la phase
+     * Pas de @return car cette méthode permet juste de modifier l'etat des joueurs à l'issu de la phase,
+     * en Eliminé ou Gagnant
      */
     @Override
     public void elimination(int nbJoueurs) {
@@ -238,6 +271,7 @@ public class PhaseIII implements Phase {
 
     /**
      * Correspond a l'affichage du resultat final de la phase, avec le grand vainqueur
+     * Pas de @return car utilisation de System.out.println
      */
     @Override
     public void affichagePhase() {
@@ -261,7 +295,10 @@ public class PhaseIII implements Phase {
         }
     }
 
-    // Getter
+    /**
+     * Getter de joueursPhaseIII
+     * @return l'attribut joueursPhaseIII de la phase correspondant au tableau de joueurs de la phase
+     */
     public Joueurs getJoueursPhaseIII() {
         return joueursPhaseIII;
     }

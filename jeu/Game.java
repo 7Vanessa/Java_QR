@@ -1,3 +1,15 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe Game : Il s'agit du Main du projet, dans lequel nous lançons
+ * le déroulé de la partie avec les 3 phases.
+ */
+
 package jeu;
 
 import elements.*;
@@ -33,6 +45,8 @@ public class Game {
             } while(!s.equals("oui") && !s.equals("non"));
             if(s.equals("non"))
                 play = false;
+            phaseI.getJoueursPhaseI().getParticipants()[0].setCompteurNom(0);
+            phaseI.getJoueursPhaseI().getParticipants()[0].setCompteur(100);
         }
     }
 }

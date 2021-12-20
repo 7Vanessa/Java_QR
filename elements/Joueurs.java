@@ -1,3 +1,18 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe Joueurs : Création de la classe Joueurs composée d'un tableau
+ * de Joueur candidats et d'un tableau de Joueur participants
+ * Le tableau de Joueur candidats est initialisé à 20
+ * Méthode toString + getters et setters des attributs et méthodes
+ * de selection de Joueur.
+ */
+
 package elements;
 
 public class Joueurs {
@@ -7,6 +22,13 @@ public class Joueurs {
     // Joueurs participants a la partie
     private Joueur[] participants;
 
+    /**
+     * Constructeur de Joueurs :
+     * Créer un tableau de 20 Joueurs candidats
+     * Remplit ce tableau en instanciant un nouveau joueur pour chaque case du tableau
+     * Créer le tableau de participants contenant les n partcipants (n choisi par l'utilisateur)
+     * @param nbPartipants nombre de joueurs partcipant à la partie
+     */
     public Joueurs(int nbPartipants) {
         candidats = new Joueur[20];
 
@@ -18,8 +40,8 @@ public class Joueurs {
     }
 
     /**
-     * Associe un personnage au hasard a un joueur
-     * @return un joueur choisi au hasard
+     * Permet de selectionner aléatoirement un joueur du tableau candidats
+     * @return le Joueur selectionné aléatoirement
      */
     public Joueur selectRandomPlayer() {
         Joueur joueur = null;
@@ -32,7 +54,10 @@ public class Joueurs {
     }
 
     /**
-     * Selection au hasard des joueurs de la partie
+     * Selectionne aléatoirement l'ensemble des joueurs participants à la partie
+     * à l'aide de la methode selectRandomPlayer().
+     * Pas de @return car cette méthode permet de remplir le tableau de participants
+     * avec les joueurs candidats selectionnés aléatoirement
      */
     public void selectRandomParticipants() {
         for(int i=0; i<participants.length; i++) {
@@ -40,16 +65,27 @@ public class Joueurs {
         }
     }
 
-    // Getter
+    /**
+     * Getter de participants
+     * @return l'attribut participants de joueurs
+     */
     public Joueur[] getParticipants() {
         return participants;
     }
 
-    // Setter
+    /**
+     * Setter de participants
+     * @param nouveauParticipants tableau de joueur correspondant participants
+     * Pas de @return pour un setter, modifie juste l'attribut participants
+     */
     public void setParticipants(Joueur[] nouveauParticipants) {
         participants = nouveauParticipants;
     }
 
+    /**
+     * Méthode toString
+     * @return une représentation textuelle d'un objet joueurs
+     */
     @Override
     public String toString() {
         String str = "";

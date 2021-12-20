@@ -1,8 +1,19 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe TestPhaseIII : Permet de tester la classe PhaseIII.
+ */
+
 package test_elements;
 
 import elements.*;
 
-public class testPhaseIII {
+public class TestPhaseIII {
     public static void main(String[] Args) {
         // Necessite d'une phase I pour recuperer en sortie les joueurs pour la phase II
         PhaseI phaseI = new PhaseI();

@@ -1,8 +1,19 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe TestQuestions : Permet de tester la classe Questions.
+ */
+
 package test_elements;
 
 import elements.*;
 
-public class testQuestions {
+public class TestQuestions {
     public static void main (String [] args) {
         // Initialisation d'une "liste" de questions
         Questions questions = new Questions();

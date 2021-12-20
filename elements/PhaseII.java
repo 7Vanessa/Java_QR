@@ -1,3 +1,22 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe PhaseII : Cette classe implémente l'interface Phase.
+ * La classe PhaseII est composé d'un attribut Joueurs correspondant aux
+ * joueurs de la phase, d'un attribut Themes correspondant aux thèmes de
+ * la phase et d'un attribut NOMPHASE correspondant au de la phase.
+ *
+ * Cette classe représente le déroulé de la phase II, la méthode principale est
+ * playPhase() qui permet de jouer la phase.
+ * Dans cette phase, nous demandons la saisie de 2 thèmes par
+ * chaque joueur.
+ */
+
 package elements;
 
 import java.util.*;
@@ -8,11 +27,19 @@ public class PhaseII implements Phase {
     private final Joueurs joueursPhaseII;
     private final Themes themes;
 
+    /**
+     * Permet de créer une instance de Joueurs correspondant au tableau de joueurs de la phase
+     * @param themes thèmes de la phase II
+     */
     public PhaseII(Themes themes) {
         this.themes = themes;
         joueursPhaseII = new Joueurs(3);
     }
 
+    /**
+     * Permet de selectionner la liste des joueurs participants
+     * @return la un objets Joueurs qui est la liste des joueurs participants
+     */
     // Pas d'utilite dans cette phase
     @Override
     public Joueurs selectJoueurs() {
@@ -21,7 +48,7 @@ public class PhaseII implements Phase {
 
     /**
      * Lancement de la phase II
-     * @return l'etat des joueurs pour la phase II
+     * @return la liste des joueurs ayant participé à la phase avec leur etat mis à jour
      */
     @Override
     public Joueur[] playPhase() {
@@ -68,9 +95,9 @@ public class PhaseII implements Phase {
     }
 
     /**
-     * Permet a chaque joueur encore en lice de chosir  deux themes
+     * Permet a chaque joueur encore en lice de choisir deux themes
      * @param themesPhase correspond aux themes de la phase
-     * @return un dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     * @return un dictionnaire où l'on associe un joueur à la liste des thèmes qu'il a choisi
      */
     public Map<String, List<Theme>> selectionThemeJoueur(List<Theme> themesPhase) {
         // Initialisation du dictionnaire (cle = nom du joueur encore en lice ; valeur = liste des themes qui lui sont attribues)
@@ -124,7 +151,7 @@ public class PhaseII implements Phase {
     }
 
     /**
-     * Correspond a la partie de la phase avec au moins un question facile
+     * Correspond a la partie de la phase avec au moins 2 questions moyens
      * @param tour correspond au n-ieme tour de la phase
      * @param themesParticipants correspond au dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
      * @return le tour pour les questions restantes
@@ -167,6 +194,7 @@ public class PhaseII implements Phase {
      * @param tour correspond au n-ieme tour de la phase
      * @param nbQuestions correspond au nombre de questions restant
      * @param themesParticipants correspond au dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     * Pas de @return car execute le déroulé des questions réponses
      */
     public void autresQuestions(int tour, int nbQuestions, Map<String, List<Theme>> themesParticipants) {
         // -2 a cause des deux premiers tours avec les deux questions moyennes
@@ -198,7 +226,9 @@ public class PhaseII implements Phase {
 
     /**
      * Correspond a la partie de la phase avec l'elimination des perdants
-     * @param nbJoueurs correspond au nombre de joueurs
+     * @param nbJoueurs correspond au nombre de joueurs de la phase
+     * Pas de @return car cette méthode permet juste de modifier l'etat des joueurs à l'issu de la phase,
+     * en Eliminé ou Gagnant
      */
     @Override
     public void elimination(int nbJoueurs) {
@@ -239,6 +269,7 @@ public class PhaseII implements Phase {
 
     /**
      * Correspond a l'affichage du resultat final de la phase
+     * Pas de @return car utilisation de System.out.println
      */
     @Override
     public void affichagePhase() {
@@ -255,7 +286,10 @@ public class PhaseII implements Phase {
         }
     }
 
-    // Getter
+    /**
+     * Getter de joueursPhaseII
+     * @return l'attribut joueursPhaseII de la phase correspondant au tableau de joueurs de la phase
+     */
     public Joueurs getJoueursPhaseII() {
         return joueursPhaseII;
     }

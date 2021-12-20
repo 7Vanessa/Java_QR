@@ -1,8 +1,19 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe TestThemes : Permet de tester la classe Themes.
+ */
+
 package test_elements;
 
 import elements.*;
 
-public class testThemes {
+public class TestThemes {
     public static void main(String []args) {
         // Initialisation de la "liste" de themes
         Themes themes = new Themes();

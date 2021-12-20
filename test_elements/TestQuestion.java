@@ -1,8 +1,19 @@
+/**
+ * @author Vanessa MOHAMMEDI
+ * @author Kévin HUY
+ * @author Thushanthy THEIVENDIRAN
+ * @author Lionel NGNINTEDEM
+ *
+ * Projet Questions Réponses
+ *
+ * Classe TestQuestion : Permet de tester la classe Question.
+ */
+
 package test_elements;
 
 import elements.*;
 
-public class testQuestion {
+public class TestQuestion {
     public static void main(String[] args) {
         // Initialisation d'un joueur
         Joueur joueur = new Joueur();
