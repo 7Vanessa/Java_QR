@@ -94,11 +94,13 @@ public class PhaseII implements Phase {
                     while (!found) {
                         System.out.println("Selectionnez un thème : ");
                         s = scanner.next();
+                        s.toLowerCase();
 
                         // Tant que le theme est deja pris par quelqu'un d'autre, on recommence
                         while (setThemesDP.contains(s)) {
                             System.out.println("Theme non-valide : recommencez");
                             s = scanner.next();
+                            s.toLowerCase();
                         }
 
                         // A ce stade, le theme existe et n'a pas encore ete choisi

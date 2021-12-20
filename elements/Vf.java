@@ -23,6 +23,7 @@ public class Vf extends Question {
         System.out.println("Veuillez saisir votre réponse. (true ou false)");
         Scanner choix = new Scanner(System.in);
 
+
         // Tant que la reponse saisie n'est pas un booleen...
         try {
             boolean reponse = choix.nextBoolean();

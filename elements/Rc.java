@@ -23,6 +23,7 @@ public class Rc extends Question {
 
         // Saisie de la reponse
         String reponse = choix.next();
+        reponse.toLowerCase();
         if(reponse.contains(bonneReponse)) {
             joueur.updateScore(nomPhase);
             System.out.println("Bonne réponse !" + '\n');
