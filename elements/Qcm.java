@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Qcm extends Question {
 
-    private Map<Integer, String> propositions;
+    // Dictionnaire avec : cle = numero de la reponse, valeur = texte de la reponse
+    private final Map<Integer, String> propositions;
     private final int bonneReponse;
 
     public Qcm(String enonce, int difficulte, String proposition1, String proposition2, String proposition3, int bonneReponse, Theme theme) {
@@ -19,26 +20,29 @@ public class Qcm extends Question {
         this.bonneReponse = bonneReponse;
     }
 
-    public int getBonneReponse() {
-        return bonneReponse;
-    }
-
     @Override
     public void testBonneReponse(Joueur joueur, String nomPhase) throws InputMismatchException {
-        System.out.println("Veuillez saisir votre réponse. (1, 2 ou 3)");
+        // L'utilisateur rentre le numero de la reponse
+        System.out.println("Veuillez saisir votre réponse. (1 / 2 / 3)");
         Scanner choix = new Scanner(System.in);
+
+        // Tant que la saisie n'est pas un nombre...
         try {
             int reponse = choix.nextInt();
             if (reponse != 1 && reponse != 2 && reponse != 3) {
-                System.out.println("Saisie incorrect! Veuillez recommencer.");
+                System.out.println("Saisie incorrecte! Veuillez recommencer.");
                 testBonneReponse(joueur, nomPhase);
             } else if (reponse == bonneReponse) {
                 joueur.updateScore(nomPhase);
                 System.out.println("Bonne réponse !" + '\n');
             }
+            else
+                System.out.println("Mauvaise réponse !" + '\n');
         }
+
+        // ...on recommence la saisie
         catch(InputMismatchException e) {
-            System.out.println("Saisie incorrect! Veuillez recommencer." + '\n');
+            System.out.println("Saisie incorrecte! Veuillez recommencer." + '\n');
             testBonneReponse(joueur, nomPhase);
         }
     }

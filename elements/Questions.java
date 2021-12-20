@@ -20,10 +20,6 @@ public class Questions implements Iterable<Question> {
         questions.remove(indice);
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
     @Override
     public Iterator<Question> iterator() {
         return questions.iterator();
@@ -37,11 +33,10 @@ public class Questions implements Iterable<Question> {
 
     @Override
     public String toString() {
-        String str = "";
-        Iterator<Question> iterQuestions = questions.iterator();
-        while(iterQuestions.hasNext()) {
-            str += iterQuestions.next().toString() + '\n';
+        StringBuilder str = new StringBuilder();
+        for (Question question : questions) {
+            str.append(question.toString()).append('\n');
         }
-        return str;
+        return str.toString();
     }
 }

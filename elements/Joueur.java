@@ -9,9 +9,12 @@ public class Joueur {
     private final String nom;
     private final int numero;
     private int score = 0;
+
+    // Dictionnaire avec : cle =
     private final Map<String, String> etats;
     private String etat;
-    // compteur pour le nom
+
+    // Compteur pour le nom
     private static int compteurNom = 1;
 
     public Joueur() {

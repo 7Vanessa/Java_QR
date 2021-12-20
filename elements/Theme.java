@@ -10,6 +10,7 @@ public class Theme {
         questions = new Questions();
     }
 
+    // Getters
     public String getTheme() {
         return nom;
     }
@@ -22,16 +23,13 @@ public class Theme {
         return nom;
     }
 
+    // Setters
     public void setQuestions(Questions questions) {
         this.questions = questions;
     }
 
     @Override
     public String toString() {
-        //String str = "Thème : " + nom + '\n';
-        /*for(Question question : questions) {
-            str += question.toString() + '\n';
-        }*/
         return nom;
     }
 }

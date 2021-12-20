@@ -6,6 +6,9 @@ import java.util.Map;
 public abstract class Question {
 
     private final String enonce;
+
+    // Dictionnaire avec : cle = numero, valeur = nom de la difficulte
+    // Utilite : rends plus simple l'acces aux difficultes par des cles de type "int"
     private final Map<Integer, String> difficultes;
     private static int compteur = 1;
     private final int numero;
@@ -27,16 +30,18 @@ public abstract class Question {
 
     public abstract void saisie();
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
-    }
-
+    // Getters
     public Theme getTheme() {
         return theme;
     }
 
     public int getDifficulte() {
         return difficulte;
+    }
+
+    // Setters
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     @Override

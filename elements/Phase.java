@@ -1,14 +1,11 @@
 package elements;
 
 import java.util.List;
+import java.util.Map;
 
 public interface Phase {
-    public Joueurs selectJoueurs();
-    public Joueur[] playPhase();
-    public String getNomPhase();
-    int choixNbJoueurs();
-    void questionsDifficulte(int tour, Theme theme);
-    void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> ThemesPhase);
+    Joueurs selectJoueurs();
+    Joueur[] playPhase();
     void elimination(int nbJoueurs);
     void affichagePhase();
 }

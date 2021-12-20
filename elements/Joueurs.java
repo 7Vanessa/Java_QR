@@ -2,11 +2,12 @@ package elements;
 
 public class Joueurs {
 
-    private Joueur[] candidats;
+    private final Joueur[] candidats;
     private Joueur[] participants;
 
     public Joueurs(int nbPartipants) {
         candidats = new Joueur[20];
+
         // On remplit le tableau de joueurs candidats
         for(int i=0; i<candidats.length; i++) {
             candidats[i] = new Joueur();
@@ -14,14 +15,7 @@ public class Joueurs {
         participants = new Joueur[nbPartipants];
     }
 
-    public Joueur[] getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(Joueur[] nouveauParticipants) {
-        participants = nouveauParticipants;
-    }
-
+    // Selection au hasard du personnage du joueur
     public Joueur selectRandomPlayer() {
         Joueur joueur = null;
         while(joueur == null) {
@@ -32,10 +26,21 @@ public class Joueurs {
         return joueur;
     }
 
+    // Selection au hasard des joueurs de la partie
     public void selectRandomParticipants() {
         for(int i=0; i<participants.length; i++) {
             participants[i] = selectRandomPlayer();
         }
+    }
+
+    // Getter
+    public Joueur[] getParticipants() {
+        return participants;
+    }
+
+    // Setter
+    public void setParticipants(Joueur[] nouveauParticipants) {
+        participants = nouveauParticipants;
     }
 
     @Override

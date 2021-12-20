@@ -8,7 +8,7 @@ public class PhaseI implements Phase {
 
     private final String NOMPHASE = "PhaseI";
     private Joueurs joueursPhaseI;
-    private Themes themes;
+    private final Themes themes;
 
     public PhaseI() {
         themes = new Themes();
@@ -21,7 +21,7 @@ public class PhaseI implements Phase {
     }
 
     public void initQuestionsPhaseI() {
-        //Création des themes
+        // Création des themes
         Theme maths = new Theme("maths");
         themes.addTheme(maths);
         Theme jeuxVideos = new Theme("jeuxVideos");
@@ -63,7 +63,7 @@ public class PhaseI implements Phase {
         Theme nature = new Theme("nature");
         themes.addTheme(nature);
 
-        //Création des qcm
+        // Création des qcm
         Qcm qcm1 = new Qcm("Calculer le volume d'un cylindre de 3 cm de rayon et 6 cm de hauteur",1, "149", "159",
                 "169", 3, maths);
         Qcm qcm2 = new Qcm("Si l'on parcourt 240 km en 3h, quelle est notre vitesse approximative en m/s ?",2,"22", "27",
@@ -246,7 +246,7 @@ public class PhaseI implements Phase {
         qcm59.getTheme().getQuestions().addQuestion(qcm59);
         qcm60.getTheme().getQuestions().addQuestion(qcm60);
 
-        //Creation des rc
+        // Creation des rc
         Rc rc1 = new Rc("8 x 9 = ? ",1, "72", maths);
         Rc rc2 = new Rc("(a+b)^2 = ?",2, "a^2 + 2ab + b^2", maths);
         Rc rc3 = new Rc("Quelle est la valeur de Pi à 10^-4 près?",3, "3,1416", maths);
@@ -494,112 +494,11 @@ public class PhaseI implements Phase {
     }
 
     @Override
-    public int choixNbJoueurs() {
-        Scanner scanner = new Scanner(System.in);
-        // Creation des joueurs
-        System.out.println("Rentrez le nombre de joueurs : ");
-        int nbJoueurs = scanner.nextInt();
-        while (nbJoueurs < 4 || nbJoueurs > 20) {
-            System.out.println("\nSaisie incorrrecte : le nombre de joueurs doit être compris entre 4 et 20.\nRecommencez : ");
-            nbJoueurs = scanner.nextInt();
-        }
-        return nbJoueurs;
-    }
-
-    @Override
-    public void questionsDifficulte(int tour, Theme theme) {
-        for (int i = 0; i < 1; i++) {
-            System.out.println("Tour " + tour + " : " + theme + "\n");
-            tour++;
-            for (Joueur joueur : joueursPhaseI.getParticipants()) {
-                System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
-                joueur.updateEtat("s");
-                Question randQuestion = theme.getQuestions().selectRandQuestion();
-
-                //on veut des questions de difficulte 1
-                while (randQuestion.getDifficulte() != 1) {
-                    randQuestion = theme.getQuestions().selectRandQuestion();
-                }
-
-                System.out.println(randQuestion);
-                try {
-                    randQuestion.testBonneReponse(joueur, NOMPHASE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                joueur.updateEtat("a");
-            }
-        }
-    }
-
-    @Override
-    public void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> ThemesPhase) {
-        int j = -1;
-
-        for (int k = 0; k < ThemesPhase.size(); k++) { // nombre de questions restantes, -1 a cause du premier tour avec questions faciles
-            j++;
-            if(j < nbQuestions-1) { // nombre de themes au total
-                indiceTheme++;
-                if(indiceTheme >= ThemesPhase.size())
-                    indiceTheme = 0;
-                theme = ThemesPhase.get(indiceTheme);
-                System.out.println("Tour " + tour + " : " + theme + "\n");
-                tour++;
-                for (Joueur joueur : joueursPhaseI.getParticipants()) {
-                    System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
-                    joueur.updateEtat("s");
-                    Question randQuestion = theme.getQuestions().selectRandQuestion();
-                    System.out.println(randQuestion);
-                    try {
-                        randQuestion.testBonneReponse(joueur, NOMPHASE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    joueur.updateEtat("a");
-                }
-            }
-            else
-                break;
-        }
-    }
-
-    @Override
-    public void elimination(int nbJoueurs) {
-        int nbDemiFinalistes = nbJoueurs;
-        while (nbDemiFinalistes > 3) {
-            int k = 0;
-            int min;
-            do {
-                min = joueursPhaseI.getParticipants()[k].getScore();;
-                k++;
-            } while(joueursPhaseI.getParticipants()[k-1].getEtat().equals("Eliminé"));
-            int indiceMin = k-1;
-            for (int i = 1; i < nbJoueurs; i++) {
-                if (joueursPhaseI.getParticipants()[i].getScore() < min && !joueursPhaseI.getParticipants()[i].getEtat().equals("Eliminé")) {
-                    min = joueursPhaseI.getParticipants()[i].getScore();
-                    indiceMin = i;
-                }
-            }
-            joueursPhaseI.getParticipants()[indiceMin].updateEtat("e");
-            nbDemiFinalistes--;
-        }
-    }
-
-    @Override
-    public void affichagePhase() {
-        System.out.println("Joueurs encore en lice : ");
-        for (Joueur joueur : joueursPhaseI.getParticipants()) {
-            if(!joueur.getEtat().equals("Eliminé"))
-                joueur.updateEtat("g");
-            System.out.println(joueur);
-        }
-        System.out.println("\n");
-    }
-
-    @Override
     public Joueur[] playPhase() throws InputMismatchException {
-        //Creation des themes et questions
+
+        // Initialisation des themes et questions
         initQuestionsPhaseI();
+
         // Saisie du nombre de joueurs
         int nbJoueurs = 0;
         boolean mismatch = true;
@@ -618,43 +517,167 @@ public class PhaseI implements Phase {
 
         System.out.println(joueursPhaseI);
 
-        // Selection des n themes
+        // Selection de n themes de la banque de themes
         List<Theme> themesPhaseI = themes.selectNThemes((int) (Math.random() * 11) + 10);
         System.out.println("Thèmes de la phase I :\n" + themesPhaseI + "\n");
 
         // Selection aleatoire d'un theme parmis ces n themes
         int indiceTheme = (int) (Math.random() * themesPhaseI.size());
-        Theme unTheme = themesPhaseI.get(indiceTheme);
+        Theme theme = themesPhaseI.get(indiceTheme);
 
         // Choix du nombre de questions par joueurs, entre 1 et 4
         int nbQuestions = (int) (Math.random() * 4) + 1;
         System.out.println("Nombre de questions par joueur : "+nbQuestions);
 
-        // Les joueurs repondent aux questions (dans l'ordre de selection)
-
+        // Partie de la phase avec UNE question facile
         int tour = 1;
-        // Partie de la phase avec que des questions faciles
-        questionsDifficulte(tour, unTheme);
+        questionsDifficulte(tour, theme);
 
-        // Partie de la phase avec le nombre de questions restant
-        autresQuestions(tour, unTheme, nbQuestions, indiceTheme, themesPhaseI);
+        // Partie de la phase avec le nombre de questions restantes
+        autresQuestions(tour, theme, nbQuestions, indiceTheme, themesPhaseI);
         System.out.println("Phase I terminée.\n");
 
         // Elimination des joueurs : on enleve les plus faibles
         elimination(nbJoueurs);
 
+        // Affichage du resultat final
         affichagePhase();
 
         return joueursPhaseI.getParticipants();
     }
 
+
+    public int choixNbJoueurs() {
+        // Saisie du nombre de joueurs (entre 4 et 20)
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Rentrez le nombre de joueurs : ");
+        int nbJoueurs = scanner.nextInt();
+        while (nbJoueurs < 4 || nbJoueurs > 20) {
+            System.out.println("\nSaisie incorrrecte : le nombre de joueurs doit être compris entre 4 et 20.\nRecommencez : ");
+            nbJoueurs = scanner.nextInt();
+        }
+        return nbJoueurs;
+    }
+
+    public void questionsDifficulte(int tour, Theme theme) {
+        for (int i = 0; i < 1; i++) {
+            System.out.println("Tour " + tour + " : " + theme + "\n");
+            tour++;
+
+            // Pour chaque joueur...
+            for (Joueur joueur : joueursPhaseI.getParticipants()) {
+                System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
+
+                // Joueur selectionne
+                joueur.updateEtat("s");
+
+                // ...on lui pose une question...
+                Question randQuestion = theme.getQuestions().selectRandQuestion();
+
+                // ...de difficulte "facile"
+                while (randQuestion.getDifficulte() != 1) {
+                    randQuestion = theme.getQuestions().selectRandQuestion();
+                }
+
+                System.out.println(randQuestion);
+                try {
+                    randQuestion.testBonneReponse(joueur, NOMPHASE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Joueur remis en attente
+                joueur.updateEtat("a");
+            }
+        }
+    }
+
+    public void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> ThemesPhase) {
+        int j = -1;
+        for (int k = 0; k < ThemesPhase.size(); k++) {
+            j++;
+
+            // -1 a cause du premier tour avec la question facile
+            if(j < nbQuestions-1) {
+                indiceTheme++;
+                if(indiceTheme >= ThemesPhase.size())
+                    indiceTheme = 0;
+
+                // On recupere le theme de la phase a cet indice
+                theme = ThemesPhase.get(indiceTheme);
+                System.out.println("Tour " + tour + " : " + theme + "\n");
+                tour++;
+
+                // Pour chaque joueur...
+                for (Joueur joueur : joueursPhaseI.getParticipants()) {
+                    System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
+                    joueur.updateEtat("s");
+
+                    // ...on lui pose du question du theme de la phase de cet indice
+                    Question randQuestion = theme.getQuestions().selectRandQuestion();
+                    System.out.println(randQuestion);
+                    try {
+                        randQuestion.testBonneReponse(joueur, NOMPHASE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    joueur.updateEtat("a");
+                }
+            }
+            else
+                break;
+        }
+    }
+
     @Override
-    public String getNomPhase() {
-        return NOMPHASE;
+    public void elimination(int nbJoueurs) {
+        int nbDemiFinalistes = nbJoueurs;
+
+        // Algotithme pour trouver le minimum d'un tableau
+        // Tant qu'on a pas de demi-finalistes
+        while (nbDemiFinalistes > 3) {
+            int k = 0;
+
+            // On initialise "min" avec le score du premier joueur non-elimine
+            int min;
+            do {
+                min = joueursPhaseI.getParticipants()[k].getScore();;
+                k++;
+            } while(joueursPhaseI.getParticipants()[k-1].getEtat().equals("Eliminé"));
+
+            // Indice du joueur avec le plus bas score
+            int indiceMin = k-1;
+            for (int i = 1; i < nbJoueurs; i++) {
+                // Si le joueur courant a un score plus petit que "min" ET si ce joueur n'est pas deja elimine
+                if (joueursPhaseI.getParticipants()[i].getScore() < min && !joueursPhaseI.getParticipants()[i].getEtat().equals("Eliminé")) {
+                    min = joueursPhaseI.getParticipants()[i].getScore();
+                    indiceMin = i;
+                }
+            }
+
+            // On elimine le joueur a l'indice du joueur avec le plus bas score
+            joueursPhaseI.getParticipants()[indiceMin].updateEtat("e");
+            nbDemiFinalistes--;
+        }
+    }
+
+    @Override
+    public void affichagePhase() {
+        System.out.println("Joueurs encore en lice : ");
+
+        // Pour chaque joueur de la phase...
+        for (Joueur joueur : joueursPhaseI.getParticipants()) {
+
+            // ...si il n'est pas elimine...
+            if(!joueur.getEtat().equals("Eliminé"))
+                // ...on met le statur a "Gagnant"
+                joueur.updateEtat("g");
+            System.out.println(joueur);
+        }
+        System.out.println("\n");
     }
 
     public Themes getThemes() {
         return themes;
     }
-
 }

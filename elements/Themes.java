@@ -14,10 +14,6 @@ public class Themes {
         themes.add(theme);
     }
 
-    public List<Theme> getThemes() {
-        return themes;
-    }
-
     public int selectTheme(Theme theme) {
         for(int i = 0 ; i < themes.size() ; i++) {
             if(themes.get(i).equals(theme))
@@ -39,6 +35,11 @@ public class Themes {
             }
         }
         return themesChoisis;
+    }
+
+    // Getter
+    public List<Theme> getThemes() {
+        return themes;
     }
 
     @Override

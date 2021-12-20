@@ -20,16 +20,20 @@ public class Vf extends Question {
     public void testBonneReponse(Joueur joueur, String nomPhase) throws InputMismatchException {
         System.out.println("Veuillez saisir votre réponse. (true ou false)");
         Scanner choix = new Scanner(System.in);
+
+        // Tant que la reponse saisie n'est pas un booleen...
         try {
-            Boolean reponse = choix.nextBoolean();
+            boolean reponse = choix.nextBoolean();
             if(reponse == bonneReponse) {
                 joueur.updateScore(nomPhase);
                 System.out.println("Bonne réponse !" + '\n');
             }
             else {
-                System.out.println("Mauvaise réponse :(" + '\n');
+                System.out.println("Mauvaise réponse " + '\n');
             }
         }
+
+        // ...on recommence la saisie
         catch(InputMismatchException e) {
             System.out.println("Saisie incorrect! Veuillez recommencer.");
             testBonneReponse(joueur, nomPhase);
