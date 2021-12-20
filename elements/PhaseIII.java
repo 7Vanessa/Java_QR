@@ -13,11 +13,16 @@ public class PhaseIII implements Phase {
         joueursPhaseIII = new Joueurs(3);
     }
 
+    // Pas d'utilite dans cette phase
     @Override
     public Joueurs selectJoueurs() {
         return null;
     }
 
+    /**
+     * Lancement de la phase III
+     * @return l'etat des joueurs
+     */
     @Override
     public Joueur[] playPhase() {
         // Initialisation du nombre de joueurs (elimines compris)
@@ -54,7 +59,7 @@ public class PhaseIII implements Phase {
         questionsDifficulte(tour, indiceTheme, unTheme, themesPhase);
 
         // Parties de la phase avec les questions restantes
-        autresQuestions(tour, unTheme, nbQuestions, indiceTheme, themesPhase);
+        autresQuestions(tour, nbQuestions, indiceTheme, themesPhase);
 
         System.out.println("Phase III terminée\n");
 
@@ -67,6 +72,13 @@ public class PhaseIII implements Phase {
         return joueursPhaseIII.getParticipants();
     }
 
+    /**
+     * Correspond a la partie de la phase avec au moins un question facile
+     * @param tour correspond au n-ieme tour de la phase
+     * @param indiceTheme correspond a l'indice du theme du tour actuel
+     * @param theme correspond a l'indice du theme choisi a chaque tour (Round-Robin)
+     * @param themesPhase correspond aux themes de la phase
+     */
     public void questionsDifficulte(int tour, int indiceTheme, Theme theme, List<Theme> themesPhase) {
         for (int i = 0; i < 2; i++) {
             System.out.println("Tour " + tour + " : " + theme + "\n");
@@ -98,7 +110,14 @@ public class PhaseIII implements Phase {
         }
     }
 
-    public void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> themesPhase) {
+    /**
+     * Correspond a la partie de la phase avec le reste des questions
+     * @param tour correspond au n-ieme tour de la phase
+     * @param nbQuestions correspond au nombre de questions restant
+     * @param indiceTheme correspond a l'indice du theme choisi a chaque tour (Round-Robin)
+     * @param themesPhase correspond aux themes de la phase
+     */
+    public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase) {
         int j = -1;
 
         // On decremente "indiceTheme" car il y aurait un decalage lors de la premiere iteration avec l'incrementation a la ligne 117
@@ -114,7 +133,7 @@ public class PhaseIII implements Phase {
                     indiceTheme = 0;
 
                 // On recupere le theme de la phase a cet indice
-                theme = themesPhase.get(indiceTheme);
+                Theme theme = themesPhase.get(indiceTheme);
                 System.out.println("Tour " + tour + " : " + theme + "\n");
                 tour++;
 
@@ -142,6 +161,10 @@ public class PhaseIII implements Phase {
 
     }
 
+    /**
+     * Correspond a la partie de la phase avec l'elimination des perdants
+     * @param nbJoueurs correspond au nombre de joueurs
+     */
     @Override
     public void elimination(int nbJoueurs) {
         int vainqueur = 0;
@@ -181,6 +204,9 @@ public class PhaseIII implements Phase {
         }
     }
 
+    /**
+     * Correspond a l'affichage du resultat final de la phase, avec le grand vainqueur
+     */
     @Override
     public void affichagePhase() {
         System.out.println("Résultat final : ");
@@ -203,6 +229,7 @@ public class PhaseIII implements Phase {
         }
     }
 
+    // Getter
     public Joueurs getJoueursPhaseIII() {
         return joueursPhaseIII;
     }

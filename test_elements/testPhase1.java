@@ -1,8 +1,11 @@
 package test_elements;
 
+import elements.Joueur;
+import elements.PhaseI;
+
 public class testPhase1 {
     public static void main(String[] args) {
-        // Créer un objet Themes
-        //
+        PhaseI phaseI = new PhaseI();
+        phaseI.playPhase();
     }
 }

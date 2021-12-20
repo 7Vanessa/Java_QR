@@ -20,6 +20,12 @@ public class Qcm extends Question {
         this.bonneReponse = bonneReponse;
     }
 
+    /**
+     * Saisie d'une reponse et validation
+     * @param joueur correspond au joueur repondant a la question
+     * @param nomPhase correspond a la phase actuelle pour determiner le nombre de points gagnes
+     * @throws InputMismatchException si la reponse n'est pas un entier
+     */
     @Override
     public void testBonneReponse(Joueur joueur, String nomPhase) throws InputMismatchException {
         // L'utilisateur rentre le numero de la reponse

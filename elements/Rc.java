@@ -11,6 +11,11 @@ public class Rc extends Question {
         this.bonneReponse = bonneReponse;
     }
 
+    /**
+     * Saisie d'une reponse et validation
+     * @param joueur correspond au joueur repondant a la question
+     * @param nomPhase correspond a la phase actuelle pour determiner le nombre de points gagnes
+     */
     @Override
     public void testBonneReponse(Joueur joueur, String nomPhase) {
         System.out.println("Veuillez saisir votre réponse.");

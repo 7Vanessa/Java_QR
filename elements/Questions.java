@@ -20,12 +20,19 @@ public class Questions implements Iterable<Question> {
         questions.remove(indice);
     }
 
+    /**
+     * Iterateur sur l'attribut de la classe (List)
+     * @return l'iterateur de la liste
+     */
     @Override
     public Iterator<Question> iterator() {
         return questions.iterator();
     }
 
-    // Implementation de methodes de selection de question en fonction de la phase
+    /**
+     * Selectionne une question au hasard dans la liste des questions
+     * @return la question choisie au hasard
+     */
     public Question selectRandQuestion() {
         int indiceQuestion = (int) (Math.random()*(questions.size()-1))+1;
         return questions.get(indiceQuestion);

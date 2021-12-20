@@ -13,11 +13,16 @@ public class PhaseII implements Phase {
         joueursPhaseII = new Joueurs(3);
     }
 
+    // Pas d'utilite dans cette phase
     @Override
     public Joueurs selectJoueurs() {
         return null;
     }
 
+    /**
+     * Lancement de la phase II
+     * @return l'etat des joueurs pour la phase II
+     */
     @Override
     public Joueur[] playPhase() {
         // Initialisation du nombre de joueurs (elimines compris)
@@ -58,6 +63,11 @@ public class PhaseII implements Phase {
         return joueursPhaseII.getParticipants();
     }
 
+    /**
+     * Permet a chaque joueur encore en lice de chosir  deux themes
+     * @param themesPhase correspond aux themes de la phase
+     * @return un dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     */
     public Map<String, List<Theme>> selectionThemeJoueur(List<Theme> themesPhase) {
         // Initialisation du dictionnaire (cle = nom du joueur encore en lice ; valeur = liste des themes qui lui sont attribues)
         Map<String, List<Theme>> themesParticipants = new HashMap<>();
@@ -67,7 +77,7 @@ public class PhaseII implements Phase {
         }
 
         Scanner scanner = new Scanner(System.in);
-        String s = "";
+        String s;
 
         // Ensemble de themes deja pris
         Set<String> setThemesDP = new HashSet<>();
@@ -107,6 +117,11 @@ public class PhaseII implements Phase {
         return themesParticipants;
     }
 
+    /**
+     * Correspond a la partie de la phase avec au moins un question facile
+     * @param tour correspond au n-ieme tour de la phase
+     * @param themesParticipants correspond au dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     */
     public void questionsDifficulte(int tour, Map<String, List<Theme>> themesParticipants) {
         int randTheme;
         for (int i = 0; i < 2; i++) {
@@ -138,6 +153,12 @@ public class PhaseII implements Phase {
         }
     }
 
+    /**
+     * Correspond a la partie de la phase avec le reste des questions
+     * @param tour correspond au n-ieme tour de la phase
+     * @param nbQuestions correspond au nombre de questions restant
+     * @param themesParticipants correspond au dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     */
     public void autresQuestions(int tour, int nbQuestions, Map<String, List<Theme>> themesParticipants) {
         // -2 a cause des deux premiers tours avec les deux questions moyennes
         for (int k = 0; k < nbQuestions-2; k++) {
@@ -166,6 +187,10 @@ public class PhaseII implements Phase {
         }
     }
 
+    /**
+     * Correspond a la partie de la phase avec l'elimination des perdants
+     * @param nbJoueurs correspond au nombre de joueurs
+     */
     @Override
     public void elimination(int nbJoueurs) {
         int nbFinalistes = 0;
@@ -203,6 +228,9 @@ public class PhaseII implements Phase {
         }
     }
 
+    /**
+     * Correspond a l'affichage du resultat final de la phase
+     */
     @Override
     public void affichagePhase() {
         System.out.println("Joueurs encore en lice : ");
@@ -218,6 +246,7 @@ public class PhaseII implements Phase {
         }
     }
 
+    // Getter
     public Joueurs getJoueursPhaseII() {
         return joueursPhaseII;
     }

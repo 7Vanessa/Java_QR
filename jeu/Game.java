@@ -12,7 +12,7 @@ public class Game {
             PhaseI phaseI = new PhaseI();
             Joueur[] joueursPhaseII = phaseI.playPhase();
 
-            // Phase Ii
+            // Phase II
             Themes themesPhaseII = phaseI.getThemes();
             PhaseII phaseII = new PhaseII(themesPhaseII);
             phaseII.getJoueursPhaseII().setParticipants(joueursPhaseII);

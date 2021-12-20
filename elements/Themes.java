@@ -14,6 +14,11 @@ public class Themes {
         themes.add(theme);
     }
 
+    /**
+     * Selection d'un theme
+     * @param theme correspond au theme specifique que l'on veut recuperer
+     * @return un entier
+     */
     public int selectTheme(Theme theme) {
         for(int i = 0 ; i < themes.size() ; i++) {
             if(themes.get(i).equals(theme))
@@ -23,6 +28,11 @@ public class Themes {
         return -1;
     }
 
+    /**
+     * Selection de n themes parmis tous les themes de la banque
+     * @param nbThemes correspond au nombre de themes
+     * @return la liste des themes choisis au hasard
+     */
     public List<Theme> selectNThemes(int nbThemes) {
         List<Theme> themesChoisis = new ArrayList<>();
         int rand;

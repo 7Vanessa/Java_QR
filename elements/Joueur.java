@@ -10,7 +10,8 @@ public class Joueur {
     private final int numero;
     private int score = 0;
 
-    // Dictionnaire avec : cle =
+    // Dictionnaire avec : cle = nom simplifie de l'etat, valeur = nom de l'etat
+    // Utilite : rends plus simple l'acces des etats
     private final Map<String, String> etats;
     private String etat;
 
@@ -31,10 +32,6 @@ public class Joueur {
         etat = etats.get("a");
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public void updateScore(String nomPhase) {
         switch (nomPhase) {
             case "PhaseI" -> score += 2;
@@ -45,6 +42,11 @@ public class Joueur {
 
     public void updateEtat(String etat) {
         this.etat = etats.get(etat);
+    }
+
+    // Getters
+    public int getScore() {
+        return score;
     }
 
     public String getEtat() {

@@ -2,7 +2,9 @@ package elements;
 
 public class Joueurs {
 
+    // Tous les personnages du jeu
     private final Joueur[] candidats;
+    // Joueurs participants a la partie
     private Joueur[] participants;
 
     public Joueurs(int nbPartipants) {
@@ -15,7 +17,10 @@ public class Joueurs {
         participants = new Joueur[nbPartipants];
     }
 
-    // Selection au hasard du personnage du joueur
+    /**
+     * Associe un personnage au hasard a un joueur
+     * @return un joueur choisi au hasard
+     */
     public Joueur selectRandomPlayer() {
         Joueur joueur = null;
         while(joueur == null) {
@@ -26,7 +31,9 @@ public class Joueurs {
         return joueur;
     }
 
-    // Selection au hasard des joueurs de la partie
+    /**
+     * Selection au hasard des joueurs de la partie
+     */
     public void selectRandomParticipants() {
         for(int i=0; i<participants.length; i++) {
             participants[i] = selectRandomPlayer();

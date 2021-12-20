@@ -14,12 +14,19 @@ public class PhaseI implements Phase {
         themes = new Themes();
     }
 
+    /**
+     * Permet d'attribuer un personnage a chaque joueur de la partie
+     * @return les personnages des joueurs
+     */
     @Override
     public Joueurs selectJoueurs() {
         joueursPhaseI.selectRandomParticipants();
         return joueursPhaseI;
     }
 
+    /**
+     * Permet d'initialiser les questions du jeu
+     */
     public void initQuestionsPhaseI() {
         // Création des themes
         Theme maths = new Theme("maths");
@@ -493,6 +500,11 @@ public class PhaseI implements Phase {
         vf60.getTheme().getQuestions().addQuestion(vf60);
     }
 
+    /**
+     * Lancement de la phase I
+     * @return l'etat des joueurs pour la phase II
+     * @throws InputMismatchException si le nombre de joueur n'est pas un entier
+     */
     @Override
     public Joueur[] playPhase() throws InputMismatchException {
 
@@ -534,7 +546,7 @@ public class PhaseI implements Phase {
         questionsDifficulte(tour, theme);
 
         // Partie de la phase avec le nombre de questions restantes
-        autresQuestions(tour, theme, nbQuestions, indiceTheme, themesPhaseI);
+        autresQuestions(tour, nbQuestions, indiceTheme, themesPhaseI);
         System.out.println("Phase I terminée.\n");
 
         // Elimination des joueurs : on enleve les plus faibles
@@ -546,7 +558,10 @@ public class PhaseI implements Phase {
         return joueursPhaseI.getParticipants();
     }
 
-
+    /**
+     * Permet a l'utilisateur de choisir le nombre de joueurs de la partie
+     * @return le nombre de joueurs
+     */
     public int choixNbJoueurs() {
         // Saisie du nombre de joueurs (entre 4 et 20)
         Scanner scanner = new Scanner(System.in);
@@ -559,6 +574,11 @@ public class PhaseI implements Phase {
         return nbJoueurs;
     }
 
+    /**
+     * Correspond a la partie de la phase avec au moins un question facile
+     * @param tour correspond au n-ieme tour de la phase
+     * @param theme correspond au theme de la question facile
+     */
     public void questionsDifficulte(int tour, Theme theme) {
         for (int i = 0; i < 1; i++) {
             System.out.println("Tour " + tour + " : " + theme + "\n");
@@ -592,19 +612,26 @@ public class PhaseI implements Phase {
         }
     }
 
-    public void autresQuestions(int tour, Theme theme, int nbQuestions, int indiceTheme, List<Theme> ThemesPhase) {
+    /**
+     * Correspond a la partie de la phase avec le reste des questions
+     * @param tour correspond au n-ieme tour de la phase
+     * @param nbQuestions correspond au nombre de questions restant
+     * @param indiceTheme correspond a l'indice du theme choisi a chaque tour (Round-Robin)
+     * @param themesPhase correspond aux themes de la phase
+     */
+    public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase) {
         int j = -1;
-        for (int k = 0; k < ThemesPhase.size(); k++) {
+        for (int k = 0; k < themesPhase.size(); k++) {
             j++;
 
             // -1 a cause du premier tour avec la question facile
             if(j < nbQuestions-1) {
                 indiceTheme++;
-                if(indiceTheme >= ThemesPhase.size())
+                if(indiceTheme >= themesPhase.size())
                     indiceTheme = 0;
 
                 // On recupere le theme de la phase a cet indice
-                theme = ThemesPhase.get(indiceTheme);
+                Theme theme = themesPhase.get(indiceTheme);
                 System.out.println("Tour " + tour + " : " + theme + "\n");
                 tour++;
 
@@ -629,6 +656,10 @@ public class PhaseI implements Phase {
         }
     }
 
+    /**
+     * Correspond a la partie de la phase avec l'elimination des perdants
+     * @param nbJoueurs correspond au nombre de joueurs
+     */
     @Override
     public void elimination(int nbJoueurs) {
         int nbDemiFinalistes = nbJoueurs;
@@ -641,7 +672,7 @@ public class PhaseI implements Phase {
             // On initialise "min" avec le score du premier joueur non-elimine
             int min;
             do {
-                min = joueursPhaseI.getParticipants()[k].getScore();;
+                min = joueursPhaseI.getParticipants()[k].getScore();
                 k++;
             } while(joueursPhaseI.getParticipants()[k-1].getEtat().equals("Eliminé"));
 
@@ -661,6 +692,9 @@ public class PhaseI implements Phase {
         }
     }
 
+    /**
+     * Correspond a l'affichage du resultat final de la phase
+     */
     @Override
     public void affichagePhase() {
         System.out.println("Joueurs encore en lice : ");
@@ -677,6 +711,7 @@ public class PhaseI implements Phase {
         System.out.println("\n");
     }
 
+    // Getter
     public Themes getThemes() {
         return themes;
     }

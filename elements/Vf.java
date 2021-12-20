@@ -12,10 +12,12 @@ public class Vf extends Question {
         this.bonneReponse = bonneReponse;
     }
 
-    public boolean getBonneReponse() {
-        return bonneReponse;
-    }
-
+    /**
+     * Saisie d'une reponse et validation
+     * @param joueur correspond au joueur repondant a la question
+     * @param nomPhase correspond a la phase actuelle pour determiner le nombre de points gagnes
+     * @throws InputMismatchException si la reponse n'est pas un booleen
+     */
     @Override
     public void testBonneReponse(Joueur joueur, String nomPhase) throws InputMismatchException {
         System.out.println("Veuillez saisir votre réponse. (true ou false)");
@@ -29,7 +31,7 @@ public class Vf extends Question {
                 System.out.println("Bonne réponse !" + '\n');
             }
             else {
-                System.out.println("Mauvaise réponse " + '\n');
+                System.out.println("Mauvaise réponse !" + '\n');
             }
         }
 
