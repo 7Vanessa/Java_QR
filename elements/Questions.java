@@ -33,9 +33,17 @@ public class Questions implements Iterable<Question> {
      * Selectionne une question au hasard dans la liste des questions
      * @return la question choisie au hasard
      */
+    public Question selectRandQuestion(int indice) {
+        return questions.get(indice);
+    }
+
     public Question selectRandQuestion() {
-        int indiceQuestion = (int) (Math.random()*(questions.size()-1))+1;
-        return questions.get(indiceQuestion);
+        int indice = (int) (Math.random()*(questions.size()-1))+1;
+        return questions.get(indice);
+    }
+
+    public int indiceRandQuestions() {
+        return (int) (Math.random()*(questions.size()-1))+1;
     }
 
     @Override
@@ -45,5 +53,10 @@ public class Questions implements Iterable<Question> {
             str.append(question.toString()).append('\n');
         }
         return str.toString();
+    }
+
+    // Getter
+    public List<Question> getQuestions() {
+        return questions;
     }
 }

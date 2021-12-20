@@ -46,8 +46,12 @@ public class PhaseII implements Phase {
 
         Map<String, List<Theme>> themesParticipants = selectionThemeJoueur(themesPhase);
 
+        // Question choisie au hasard pour le premier joueur du 1er tour
+        int indiceQuestion = themes.getThemes().get(0).getQuestions().indiceRandQuestions();
+
         // Partie de la phase avec DEUX questions moyennes
         int tour = 1;
+
         tour = questionsDifficulte(tour, themesParticipants);
 
         // Partie de la phase avec les questions restantes
@@ -130,6 +134,7 @@ public class PhaseII implements Phase {
         for (int i = 0; i < 2; i++) {
             System.out.println("Tour " + tour + " :\n");
             tour++;
+
             for (Joueur joueur : joueursPhaseII.getParticipants()) {
 
                 // Indice de l'un des deux themes du joueur

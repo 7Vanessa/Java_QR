@@ -1,8 +1,6 @@
 package elements;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class PhaseI implements Phase {
 
@@ -498,6 +496,11 @@ public class PhaseI implements Phase {
         vf58.getTheme().getQuestions().addQuestion(vf58);
         vf59.getTheme().getQuestions().addQuestion(vf59);
         vf60.getTheme().getQuestions().addQuestion(vf60);
+
+        // On melange les questions des themes
+        for(Theme theme : themes.getThemes()) {
+            Collections.shuffle(theme.getQuestions().getQuestions());
+        }
     }
 
     /**
@@ -541,12 +544,15 @@ public class PhaseI implements Phase {
         int nbQuestions = (int) (Math.random() * 4) + 1;
         System.out.println("Nombre de questions par joueur : "+nbQuestions);
 
+        // Question choisie au hasard pour le premier joueur du 1er tour
+        int indiceQuestion = theme.getQuestions().indiceRandQuestions();
+
         // Partie de la phase avec UNE question facile
         int tour = 1;
-        tour = questionsDifficulte(tour, theme);
+        indiceQuestion = questionsDifficulte(tour, theme, indiceQuestion);
 
         // Partie de la phase avec le nombre de questions restantes
-        autresQuestions(tour, nbQuestions, indiceTheme, themesPhaseI);
+        autresQuestions(tour, nbQuestions, indiceTheme, themesPhaseI, indiceQuestion);
         System.out.println("Phase I terminée.\n");
 
         // Elimination des joueurs : on enleve les plus faibles
@@ -580,9 +586,14 @@ public class PhaseI implements Phase {
      * @param theme correspond au theme de la question facile
      * @return le tour pour les questions restantes
      */
-    public int questionsDifficulte(int tour, Theme theme) {
+    public int questionsDifficulte(int tour, Theme theme, int indiceQuestion) {
+        Question question;
+
         for (int i = 0; i < 1; i++) {
             System.out.println("Tour " + tour + " : " + theme + "\n");
+            question = theme.getQuestions().selectRandQuestion(indiceQuestion);
+            if(indiceQuestion >= theme.getQuestions().getQuestions().size())
+                indiceQuestion = 0;
             tour++;
 
             // Pour chaque joueur...
@@ -593,36 +604,53 @@ public class PhaseI implements Phase {
                 joueur.updateEtat("s");
 
                 // ...on lui pose une question...
-                Question randQuestion = theme.getQuestions().selectRandQuestion();
-
-                // ...de difficulte "facile"
-                while (randQuestion.getDifficulte() != 1) {
-                    randQuestion = theme.getQuestions().selectRandQuestion();
+                // Si c'est le premier joueur du tour 1, on lui pose une question au hasard
+                if(joueur.getNom().equals(joueursPhaseI.getParticipants()[0].getNom()) && tour == 1) {
+                    System.out.println(question);
+                    try {
+                        question.testBonneReponse(joueur, NOMPHASE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
-                System.out.println(randQuestion);
-                try {
-                    randQuestion.testBonneReponse(joueur, NOMPHASE);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                // Sinon, politique de Round-Robin
+                else {
+                    do {
+                        indiceQuestion++;
+                        if(indiceQuestion >= theme.getQuestions().getQuestions().size())
+                            indiceQuestion = 0;
+                        question = theme.getQuestions().getQuestions().get(indiceQuestion);
+                    } while(theme.getQuestions().getQuestions().get(indiceQuestion).getDifficulte() != 1);
+
+                    System.out.println(question);
+                    try {
+                        question.testBonneReponse(joueur, NOMPHASE);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 // Joueur remis en attente
                 joueur.updateEtat("a");
             }
         }
-        return tour;
+        return indiceQuestion;
     }
 
     /**
      * Correspond a la partie de la phase avec le reste des questions
      * @param tour correspond au n-ieme tour de la phase
      * @param nbQuestions correspond au nombre de questions restant
-     * @param indiceTheme correspond a l'indice du theme choisi a chaque tour (Round-Robin)
+     * @param indiceTheme correspond a l'indice du theme choisi a chaque tour
      * @param themesPhase correspond aux themes de la phase
      */
-    public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase) {
+    public void autresQuestions(int tour, int nbQuestions, int indiceTheme, List<Theme> themesPhase, int indiceQuestion) {
         int j = -1;
+        Question question;
+
+        // tour++ a cause du premier tour
+        tour++;
         for (int k = 0; k < themesPhase.size(); k++) {
             j++;
 
@@ -634,19 +662,28 @@ public class PhaseI implements Phase {
 
                 // On recupere le theme de la phase a cet indice
                 Theme theme = themesPhase.get(indiceTheme);
+
+                // Continuite du Round-Robin
+                question = theme.getQuestions().getQuestions().get(indiceQuestion);
+
                 System.out.println("Tour " + tour + " : " + theme + "\n");
                 tour++;
 
-                // Pour chaque joueur...
+                // Pour chaque joueur... (Round-Robin)
                 for (Joueur joueur : joueursPhaseI.getParticipants()) {
                     System.out.println("Joueur " + joueur.getNom() + " n°" + joueur.getNumero());
                     joueur.updateEtat("s");
 
                     // ...on lui pose du question du theme de la phase de cet indice
-                    Question randQuestion = theme.getQuestions().selectRandQuestion();
-                    System.out.println(randQuestion);
+                    // Sinon, politique de Round-Robin
+
+                    indiceQuestion++;
+                    if(indiceQuestion >= theme.getQuestions().getQuestions().size())
+                        indiceQuestion = 0;
+
+                    System.out.println(question);
                     try {
-                        randQuestion.testBonneReponse(joueur, NOMPHASE);
+                        question.testBonneReponse(joueur, NOMPHASE);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
