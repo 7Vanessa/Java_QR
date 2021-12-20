@@ -48,9 +48,9 @@ public class PhaseII implements Phase {
 
         // Partie de la phase avec DEUX questions moyennes
         int tour = 1;
-        questionsDifficulte(tour, themesParticipants);
+        tour = questionsDifficulte(tour, themesParticipants);
 
-        // Partie de la phase avec les questions restatnes
+        // Partie de la phase avec les questions restantes
         autresQuestions(tour, nbQuestions, themesParticipants);
 
         System.out.println("Phase II terminée\n");
@@ -123,8 +123,9 @@ public class PhaseII implements Phase {
      * Correspond a la partie de la phase avec au moins un question facile
      * @param tour correspond au n-ieme tour de la phase
      * @param themesParticipants correspond au dictionnaire ou l'on associe un joueur a la liste des themes qu'il a choisi
+     * @return le tour pour les questions restantes
      */
-    public void questionsDifficulte(int tour, Map<String, List<Theme>> themesParticipants) {
+    public int questionsDifficulte(int tour, Map<String, List<Theme>> themesParticipants) {
         int randTheme;
         for (int i = 0; i < 2; i++) {
             System.out.println("Tour " + tour + " :\n");
@@ -153,6 +154,7 @@ public class PhaseII implements Phase {
                 }
             }
         }
+        return tour;
     }
 
     /**

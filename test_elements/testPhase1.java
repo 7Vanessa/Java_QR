@@ -1,6 +1,5 @@
 package test_elements;
 
-import elements.Joueur;
 import elements.PhaseI;
 
 public class testPhase1 {

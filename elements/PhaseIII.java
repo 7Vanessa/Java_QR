@@ -10,7 +10,7 @@ public class PhaseIII implements Phase {
 
     public PhaseIII(Themes themes) {
         this.themes = themes;
-        joueursPhaseIII = new Joueurs(3);
+        joueursPhaseIII = new Joueurs(2);
     }
 
     // Pas d'utilite dans cette phase
@@ -56,7 +56,7 @@ public class PhaseIII implements Phase {
 
         // Partie de la phase avec deux questions difficiles
         int tour = 1;
-        questionsDifficulte(tour, indiceTheme, unTheme, themesPhase);
+        tour = questionsDifficulte(tour, indiceTheme, unTheme, themesPhase);
 
         // Parties de la phase avec les questions restantes
         autresQuestions(tour, nbQuestions, indiceTheme, themesPhase);
@@ -78,8 +78,9 @@ public class PhaseIII implements Phase {
      * @param indiceTheme correspond a l'indice du theme du tour actuel
      * @param theme correspond a l'indice du theme choisi a chaque tour (Round-Robin)
      * @param themesPhase correspond aux themes de la phase
+     * @return le tour pour les questions restantes
      */
-    public void questionsDifficulte(int tour, int indiceTheme, Theme theme, List<Theme> themesPhase) {
+    public int questionsDifficulte(int tour, int indiceTheme, Theme theme, List<Theme> themesPhase) {
         for (int i = 0; i < 2; i++) {
             System.out.println("Tour " + tour + " : " + theme + "\n");
             tour++;
@@ -108,6 +109,7 @@ public class PhaseIII implements Phase {
                 indiceTheme = 0;
             theme = themesPhase.get(indiceTheme);
         }
+        return tour;
     }
 
     /**

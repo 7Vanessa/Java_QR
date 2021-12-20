@@ -31,8 +31,8 @@ public class PhaseI implements Phase {
         // Création des themes
         Theme maths = new Theme("maths");
         themes.addTheme(maths);
-        Theme jeuxVideos = new Theme("jeuxVideos");
-        themes.addTheme(jeuxVideos);
+        Theme jeux_videos = new Theme("jeux_videos");
+        themes.addTheme(jeux_videos);
         Theme series = new Theme("series");
         themes.addTheme(series);
         Theme films = new Theme("films");
@@ -78,11 +78,11 @@ public class PhaseI implements Phase {
         Qcm qcm3 = new Qcm("Un flan à la vanille contient 9% de sucre. Quel est le pourcentage de sucre contenu dans 6 flancs?",3,"9", "19",
                 "54", 1, maths);
         Qcm qcm4 = new Qcm("Quel est le jeu ayant eu le plus de récompenses en titre de jeu de l'année 2020?",1, "Red Dead Redemption", "The Witcher 3",
-                "The Last of Us", 3, jeuxVideos);
+                "The Last of Us", 3, jeux_videos);
         Qcm qcm5 = new Qcm("En quelle année les premières bornes d'arcades ont été installées",2, "1980", "1970",
-                "1984", 1, jeuxVideos);
+                "1984", 1, jeux_videos);
         Qcm qcm6 = new Qcm("Parmi ces 3 consoles, laquelle est la plus vendue",3, "Wii", "Play Station",
-                "XBox", 2, jeuxVideos);
+                "XBox", 2, jeux_videos);
         Qcm qcm7 = new Qcm("Comment s'appelle le personnage principal de la série Mentalist ?",1, "Patrick Jane", "Horatio Caine",
                 "Spencer Reid", 1, series);
         Qcm qcm8 = new Qcm("Comment s'appelle l'acteur qui joue Sherlock dans la série du même nom ?",2, "Benedict Cumberbatch", "Rupert Graves",
@@ -257,9 +257,9 @@ public class PhaseI implements Phase {
         Rc rc1 = new Rc("8 x 9 = ? ",1, "72", maths);
         Rc rc2 = new Rc("(a+b)^2 = ?",2, "a^2 + 2ab + b^2", maths);
         Rc rc3 = new Rc("Quelle est la valeur de Pi à 10^-4 près?",3, "3,1416", maths);
-        Rc rc4 = new Rc("Comment s'appelle le dinosaure vert accompagnant Mario? ",1, "yoshi", jeuxVideos);
-        Rc rc5 = new Rc("De quelle nationalité est l'entreprise Ubisoft?",2, "française", jeuxVideos);
-        Rc rc6 = new Rc("Quel est le nom de l'entreprise de jeux racheté par Microsoft en 2002?",3, "rareware", jeuxVideos);
+        Rc rc4 = new Rc("Comment s'appelle le dinosaure vert accompagnant Mario? ",1, "yoshi", jeux_videos);
+        Rc rc5 = new Rc("De quelle nationalité est l'entreprise Ubisoft?",2, "française", jeux_videos);
+        Rc rc6 = new Rc("Quel est le nom de l'entreprise de jeux racheté par Microsoft en 2002?",3, "rareware", jeux_videos);
         Rc rc7 = new Rc("Dans La Casa de Papel, où se retrouvent Raquel et le Professeur?",1, "philippines", series);
         Rc rc8 = new Rc("Comment s'appelle en réalité Michael Scofield?",2, "wentworth miller", series);
         Rc rc9 = new Rc("Dans Black Mirror, à quelle série fait allusion l'épsiode 'USS Calister?'",3, "star trek", series);
@@ -380,9 +380,9 @@ public class PhaseI implements Phase {
         Vf vf1 = new Vf("1+1 = 10", 1, false, maths);
         Vf vf2 = new Vf("2x8 + 4 = 4x5", 2, true, maths);
         Vf vf3 = new Vf("(45x167 - 15x9823 = -139820", 3, false, maths);
-        Vf vf4 = new Vf("Yoshi est un champignon", 1, false, jeuxVideos);
-        Vf vf5 = new Vf("Mario Kart a été créé par les japonais", 2, true, jeuxVideos);
-        Vf vf6 = new Vf("Ubisoft est le développeur de Clash of Clans", 3, false, jeuxVideos);
+        Vf vf4 = new Vf("Yoshi est un champignon", 1, false, jeux_videos);
+        Vf vf5 = new Vf("Mario Kart a été créé par les japonais", 2, true, jeux_videos);
+        Vf vf6 = new Vf("Ubisoft est le développeur de Clash of Clans", 3, false, jeux_videos);
         Vf vf7 = new Vf("C'est Cooper Barnes qui incarne Kid Danger dans Henry Danger", 1, false, series);
         Vf vf8 = new Vf("Phoebe est le prénom du personnage principal dans Les Thunderman", 2, true, series);
         Vf vf9 = new Vf("Dans la Casa de Papel, Tokyo menace le Professeur avec un couteau sous la gorge lors de leur première rencontre", 3, false, series);
@@ -543,7 +543,7 @@ public class PhaseI implements Phase {
 
         // Partie de la phase avec UNE question facile
         int tour = 1;
-        questionsDifficulte(tour, theme);
+        tour = questionsDifficulte(tour, theme);
 
         // Partie de la phase avec le nombre de questions restantes
         autresQuestions(tour, nbQuestions, indiceTheme, themesPhaseI);
@@ -578,8 +578,9 @@ public class PhaseI implements Phase {
      * Correspond a la partie de la phase avec au moins un question facile
      * @param tour correspond au n-ieme tour de la phase
      * @param theme correspond au theme de la question facile
+     * @return le tour pour les questions restantes
      */
-    public void questionsDifficulte(int tour, Theme theme) {
+    public int questionsDifficulte(int tour, Theme theme) {
         for (int i = 0; i < 1; i++) {
             System.out.println("Tour " + tour + " : " + theme + "\n");
             tour++;
@@ -610,6 +611,7 @@ public class PhaseI implements Phase {
                 joueur.updateEtat("a");
             }
         }
+        return tour;
     }
 
     /**
